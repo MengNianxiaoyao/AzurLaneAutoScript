@@ -2,38 +2,6 @@
 # Define arguments.
 # --------------------
 
-# ==================== ViewResources ====================
-
-ViewCurrentResources:
-    oiltomaxoil: 
-        value: 0
-        display: disabled
-    cointomaxcoin: 
-        value: 0
-        display: disabled
-    gem: 
-        value: 0
-        display: disabled
-    cube:
-        value: 0
-        display: disabled
-    pt: 
-        value: 0
-        display: disabled
-    opcoin: 
-        value: 0
-        display: disabled
-    purplecoin: 
-        value: 0
-        display: disabled
-    actionpoint: 
-        value: 0
-        display: disabled
-ViewEquipProgress:
-    234mm: 0
-    457mm: 0
-    tenrai: 0
-    152mm: 0
 # ==================== Alas ====================
 
 Scheduler:
@@ -128,11 +96,11 @@ Retirement:
   EnhanceFavourite: false
   EnhanceFilter:
   EnhanceCheckPerCategory: 2
-  AllowNoPreserve: false
   OldRetireN: true
   OldRetireR: true
   OldRetireSR: false
   OldRetireSSR: false
+
 # ==================== Farm ====================
 
 Campaign:
@@ -662,14 +630,3 @@ AzurLaneUncensored:
   Repository: https://gitee.com/LmeSzinc/AzurLaneUncensored
 GameManager:
   AutoRestart: true
-  
-GGHandler:
-  Enabled: false
-  GGPackageName: com.
-  AutoRestartGG: false
-  RestartEverytime: true
-  GGMultiplyingFactor: 200
-PowerLimit:
-  Exercise: 16500
-  Raid: 16500
-  Ash: 16500
