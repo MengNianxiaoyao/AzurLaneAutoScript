@@ -150,14 +150,15 @@ class DroidCast(Uiautomator2):
     @Config.when(DROIDCAST_VERSION='DroidCast_raw')
     def droidcast_init(self):
         logger.hr('Droidcast init')
+        self.resolution_check_uiautomator2()
         self.droidcast_stop()
 
         logger.info('Pushing DroidCast apk')
         self.adb_push(self.config.DROIDCAST_RAW_FILEPATH_LOCAL, self.config.DROIDCAST_RAW_FILEPATH_REMOTE)
 
         logger.info('Starting DroidCast apk')
-        # DroidCastS-release-1.1.1.apk
-        # CLASSPATH=/data/local/tmp/DroidCastS-release-1.1.1.apk app_process / com.torther.droidcasts.Main > /dev/null
+        # DroidCastS-release-1.1.5.apk
+        # CLASSPATH=/data/local/tmp/DroidCastS-release-1.1.5.apk app_process / com.torther.droidcasts.Main > /dev/null
         resp = self.u2_shell_background([
             'CLASSPATH=/data/local/tmp/DroidCastS.apk',
             'app_process',
@@ -210,7 +211,7 @@ class DroidCast(Uiautomator2):
                     raise DroidCastVersionIncompatible(
                         'Requesting screenshots from `DroidCast_raw` but server is `DroidCast`')
             # ValueError: cannot reshape array of size 0 into shape (720,1280)
-            raise ImageTruncated('Empty image after cv2.imdecode')
+            raise ImageTruncated(str(e))
 
         # Convert RGB565 to RGB888
         # https://blog.csdn.net/happy08god/article/details/10516871
@@ -243,6 +244,7 @@ class DroidCast(Uiautomator2):
         """
         timeout = Timer(10).start()
         while 1:
+            self.sleep(0.25)
             if timeout.reached():
                 break
 
