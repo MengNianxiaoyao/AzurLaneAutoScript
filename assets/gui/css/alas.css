@@ -368,10 +368,6 @@ pre.rich-traceback-code {
     justify-content: space-between;
 }
 
-#pywebio-scope-log-bar {
-    flex-wrap: wrap;
-}
-
 #pywebio-scope-log-bar-btns {
     display: grid;
     grid-auto-flow: column;
@@ -414,6 +410,7 @@ pre.rich-traceback-code {
     height: 100%;
     overflow-y: auto;
     grid-template-rows: auto 1fr;
+
 }
 
 [id^="pywebio-scope-overview-task_"] {

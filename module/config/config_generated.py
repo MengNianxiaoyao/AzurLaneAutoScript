@@ -9,22 +9,6 @@ class GeneratedConfig:
     Auto generated configuration
     """
 
-    # Group `ViewCurrentResources`
-    ViewCurrentResources_oiltomaxoil = 0
-    ViewCurrentResources_cointomaxcoin = 0
-    ViewCurrentResources_gem = 0
-    ViewCurrentResources_cube = 0
-    ViewCurrentResources_pt = 0
-    ViewCurrentResources_opcoin = 0
-    ViewCurrentResources_purplecoin = 0
-    ViewCurrentResources_actionpoint = 0
-
-    # Group `ViewEquipProgress`
-    ViewEquipProgress_234mm = 0
-    ViewEquipProgress_457mm = 0
-    ViewEquipProgress_tenrai = 0
-    ViewEquipProgress_152mm = 0
-
     # Group `Scheduler`
     Scheduler_Enable = False
     Scheduler_NextRun = datetime.datetime(2020, 1, 1, 0, 0)
@@ -78,7 +62,6 @@ class GeneratedConfig:
     Retirement_EnhanceFavourite = False
     Retirement_EnhanceFilter = None
     Retirement_EnhanceCheckPerCategory = 2
-    Retirement_AllowNoPreserve = False
     Retirement_OldRetireN = True
     Retirement_OldRetireR = True
     Retirement_OldRetireSR = False
@@ -430,18 +413,6 @@ class GeneratedConfig:
 
     # Group `GameManager`
     GameManager_AutoRestart = True
-
-    # Group `GGHandler`
-    GGHandler_Enabled = False
-    GGHandler_GGPackageName = 'com.'
-    GGHandler_AutoRestartGG = False
-    GGHandler_RestartEverytime = True
-    GGHandler_GGMultiplyingFactor = 200
-
-    # Group `PowerLimit`
-    PowerLimit_Exercise = 16500
-    PowerLimit_Raid = 16500
-    PowerLimit_Ash = 16500
 
     # Group `Storage`
     Storage_Storage = {}

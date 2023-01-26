@@ -4,10 +4,6 @@
       "name": "",
       "help": ""
     },
-    "ViewResources": {
-      "name": "Menu.ViewResources.name",
-      "help": "Menu.ViewResources.help"
-    },
     "Alas": {
       "name": "Alas",
       "help": ""
@@ -42,14 +38,6 @@
     }
   },
   "Task": {
-    "ViewCurrentResources": {
-      "name": "Task.ViewCurrentResources.name",
-      "help": "Task.ViewCurrentResources.help"
-    },
-    "ViewEquipProgress": {
-      "name": "Task.ViewEquipProgress.name",
-      "help": "Task.ViewEquipProgress.help"
-    },
     "Alas": {
       "name": "Alas設定",
       "help": ""
@@ -88,10 +76,6 @@
     },
     "Event2": {
       "name": "活動圖-2",
-      "help": ""
-    },
-    "Event3": {
-      "name": "活動圖-3",
       "help": ""
     },
     "EventA": {
@@ -273,66 +257,6 @@
     "GameManager": {
       "name": "遊戲管理器(未完成)",
       "help": ""
-    }
-  },
-  "ViewCurrentResources": {
-    "_info": {
-      "name": "ViewCurrentResources._info.name",
-      "help": "ViewCurrentResources._info.help"
-    },
-    "oiltomaxoil": {
-      "name": "ViewCurrentResources.oiltomaxoil.name",
-      "help": "ViewCurrentResources.oiltomaxoil.help"
-    },
-    "cointomaxcoin": {
-      "name": "ViewCurrentResources.cointomaxcoin.name",
-      "help": "ViewCurrentResources.cointomaxcoin.help"
-    },
-    "gem": {
-      "name": "ViewCurrentResources.gem.name",
-      "help": "ViewCurrentResources.gem.help"
-    },
-    "cube": {
-      "name": "ViewCurrentResources.cube.name",
-      "help": "ViewCurrentResources.cube.help"
-    },
-    "pt": {
-      "name": "ViewCurrentResources.pt.name",
-      "help": "ViewCurrentResources.pt.help"
-    },
-    "opcoin": {
-      "name": "ViewCurrentResources.opcoin.name",
-      "help": "ViewCurrentResources.opcoin.help"
-    },
-    "purplecoin": {
-      "name": "ViewCurrentResources.purplecoin.name",
-      "help": "ViewCurrentResources.purplecoin.help"
-    },
-    "actionpoint": {
-      "name": "ViewCurrentResources.actionpoint.name",
-      "help": "ViewCurrentResources.actionpoint.help"
-    }
-  },
-  "ViewEquipProgress": {
-    "_info": {
-      "name": "ViewEquipProgress._info.name",
-      "help": "ViewEquipProgress._info.help"
-    },
-    "234mm": {
-      "name": "ViewEquipProgress.234mm.name",
-      "help": "ViewEquipProgress.234mm.help"
-    },
-    "457mm": {
-      "name": "ViewEquipProgress.457mm.name",
-      "help": "ViewEquipProgress.457mm.help"
-    },
-    "tenrai": {
-      "name": "ViewEquipProgress.tenrai.name",
-      "help": "ViewEquipProgress.tenrai.help"
-    },
-    "152mm": {
-      "name": "ViewEquipProgress.152mm.name",
-      "help": "ViewEquipProgress.152mm.help"
     }
   },
   "Scheduler": {
@@ -658,10 +582,6 @@
     "EnhanceCheckPerCategory": {
       "name": "分類強化",
       "help": "每項艦船分類最多強化多少艘艦船，\n戰鬥中的艦船會被跳過且不計入，\n優先判斷是否有強化材料"
-    },
-    "AllowNoPreserve": {
-      "name": "Retirement.AllowNoPreserve.name",
-      "help": "Retirement.AllowNoPreserve.help"
     },
     "OldRetireN": {
       "name": "退役白船 ( N )",
@@ -2349,50 +2269,6 @@
       "help": "遊戲被強制結束後自動登錄遊戲"
     }
   },
-  "GGHandler": {
-    "_info": {
-      "name": "GGHandler._info.name",
-      "help": "GGHandler._info.help"
-    },
-    "Enabled": {
-      "name": "GGHandler.Enabled.name",
-      "help": "GGHandler.Enabled.help"
-    },
-    "GGPackageName": {
-      "name": "GGHandler.GGPackageName.name",
-      "help": "GGHandler.GGPackageName.help"
-    },
-    "AutoRestartGG": {
-      "name": "GGHandler.AutoRestartGG.name",
-      "help": "GGHandler.AutoRestartGG.help"
-    },
-    "RestartEverytime": {
-      "name": "GGHandler.RestartEverytime.name",
-      "help": "GGHandler.RestartEverytime.help"
-    },
-    "GGMultiplyingFactor": {
-      "name": "GGHandler.GGMultiplyingFactor.name",
-      "help": "GGHandler.GGMultiplyingFactor.help"
-    }
-  },
-  "PowerLimit": {
-    "_info": {
-      "name": "PowerLimit._info.name",
-      "help": "PowerLimit._info.help"
-    },
-    "Exercise": {
-      "name": "PowerLimit.Exercise.name",
-      "help": "PowerLimit.Exercise.help"
-    },
-    "Raid": {
-      "name": "PowerLimit.Raid.name",
-      "help": "PowerLimit.Raid.help"
-    },
-    "Ash": {
-      "name": "PowerLimit.Ash.name",
-      "help": "PowerLimit.Ash.help"
-    }
-  },
   "Storage": {
     "_info": {
       "name": "任務狀態",
@@ -2448,15 +2324,6 @@
     },
     "Overview": {
       "Scheduler": "調度器",
-      "Dashboard": "儀表盤",
-      "Oil": "石油",
-      "Coin": "物資",
-      "Gem": "鑽石",
-      "Cube": "魔方",
-      "EventPt": "活動PT",
-      "OperationSupplyCoin": "作戰補給憑證",
-      "SpecialItemToken": "特殊兌換憑證",
-      "ActionPoint": "行動力",
       "Log": "日誌",
       "Running": "執行中",
       "Pending": "佇列中",
