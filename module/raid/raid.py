@@ -5,13 +5,15 @@ from module.base.decorator import run_once
 from module.base.timer import Timer
 from module.campaign.campaign_event import CampaignEvent
 from module.combat.assets import *
-from module.combat.combat import Combat
 from module.exception import ScriptError
 from module.logger import logger
 from module.map.map_operation import MapOperation
 from module.ocr.ocr import Digit, DigitCounter
 from module.raid.assets import *
+from module.raid.combat import RaidCombat
 from module.ui.assets import RAID_CHECK
+from module.gg_handler.gg_handler import GGHandler
+from module.log_res.log_res import log_res
 
 
 class OilExhausted(Exception):
@@ -69,7 +71,7 @@ def raid_ocr(raid, mode):
     """
     Args:
         raid (str): Raid name, such as raid_20200624, raid_20210708.
-        mode (str): easy, normal, hard
+        mode (str): easy, normal, hard, ex
 
     Returns:
         DigitCounter:
@@ -98,7 +100,10 @@ def raid_ocr(raid, mode):
         elif raid == "ALBION":
             return DigitCounter(button, letter=(99, 73, 57), threshold=128)
         elif raid == 'KUYBYSHEY':
-            return DigitCounter(button, letter=(231, 239, 247), threshold=128)
+            if mode == 'ex':
+                return Digit(button, letter=(189, 203, 214), threshold=128)
+            else:
+                return DigitCounter(button, letter=(231, 239, 247), threshold=128)
     except KeyError:
         raise ScriptError(f'Raid entrance asset not exists: {key}')
 
@@ -126,7 +131,7 @@ def pt_ocr(raid):
         return None
 
 
-class Raid(MapOperation, Combat, CampaignEvent):
+class Raid(MapOperation, RaidCombat, CampaignEvent):
     def combat_preparation(self, balance_hp=False, emotion_reduce=False, auto=True, fleet_index=1):
         """
         Args:
@@ -138,7 +143,6 @@ class Raid(MapOperation, Combat, CampaignEvent):
         logger.info('Combat preparation.')
 
         # Power limit check
-        from module.gg_handler.gg_handler import GGHandler
         GGHandler(config=self.config, device=self.device).power_limit('Raid')
 
         skip_first_screenshot = True
@@ -251,10 +255,21 @@ class Raid(MapOperation, Combat, CampaignEvent):
             Campaign_UseAutoSearch=False,
             Fleet_FleetOrder='fleet1_all_fleet2_standby'
         )
+
+        if mode == 'ex':
+            backup = self.config.temporary(
+                Submarine_Fleet=1,
+                Submarine_Mode='every_combat'
+            )
+
         self.emotion.check_reduce(1)
 
         self.raid_enter(mode=mode, raid=raid)
         self.combat(balance_hp=False, expected_end=self.raid_expected_end)
+
+        if mode == 'ex':
+            backup.recover()
+
         logger.hr('Raid End')
 
     def get_event_pt(self):
@@ -279,17 +294,14 @@ class Raid(MapOperation, Combat, CampaignEvent):
                 pt = ocr.ocr(self.device.image)
                 if timeout.reached():
                     logger.warning('Wait PT timeout, assume it is')
-                    from module.log_res.log_res import log_res
                     log_res(self.config).log_res(pt, 'pt')
                     return pt
                 if pt in [70000, 70001]:
                     continue
                 else:
-                    from module.log_res.log_res import log_res
                     log_res(self.config).log_res(pt, 'pt')
                     return pt
         else:
             logger.info(f'Raid {self.config.Campaign_Event} does not support PT ocr, skip')
-            from module.log_res.log_res import log_res
             log_res(self.config).log_res(0, 'pt')
             return 0

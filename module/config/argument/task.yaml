@@ -2,12 +2,6 @@
 # Define argument group of tasks.
 # --------------------
 
-# ==================== ViewResources ====================
-
-ViewCurrentResources:
-  - ViewCurrentResources
-ViewEquipProgress:
-  - ViewEquipProgress
 # ==================== Alas ====================
 
 Alas:
@@ -75,15 +69,6 @@ Event:
   - HpControl
   - EnemyPriority
 Event2:
-  - Scheduler
-  - Campaign
-  - StopCondition
-  - Fleet
-  - Submarine
-  - Emotion
-  - HpControl
-  - EnemyPriority
-Event3:
   - Scheduler
   - Campaign
   - StopCondition
@@ -198,6 +183,7 @@ ShopOnce:
   - CoreShop
 Shipyard:
   - Scheduler
+  - ShipyardDr
   - Shipyard
 Gacha:
   - Scheduler
@@ -275,7 +261,6 @@ OpsiAbyssal:
   - OpsiFleetFilter
 OpsiArchive:
   - Scheduler
-  - OpsiArchive
   - OpsiFleet
 OpsiStronghold:
   - Scheduler
@@ -308,5 +293,3 @@ AzurLaneUncensored:
   - AzurLaneUncensored
 GameManager:
   - GameManager
-  - GGHandler
-  - PowerLimit

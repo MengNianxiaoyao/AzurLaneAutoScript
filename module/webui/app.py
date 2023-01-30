@@ -591,8 +591,8 @@ class AlasGUI(Frame):
             x=0
             y=0
             for value in resource:
-                value_time = deep_get(self.alas_config.data, keys=value+'Time',default='No data')
-                value = self.alas_config.cross_get(value)
+                value_time = str(deep_get(self.alas_config.data, keys=value+'Time', default='No data'))[-8:]
+                value = deep_get(self.alas_config.data, keys=value, default='None')
                 put_row(
                     [
                         put_html(color[y]),
@@ -606,8 +606,8 @@ class AlasGUI(Frame):
                     ],
                     size="20px 1fr"
                 )
-                x=x+1
-                y=y+1
+                x+=1
+                y+=1
 
     @use_scope("content", clear=True)
     def alas_daemon_overview(self, task: str) -> None:
