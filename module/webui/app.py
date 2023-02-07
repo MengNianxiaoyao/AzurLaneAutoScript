@@ -663,11 +663,12 @@ class AlasGUI(Frame):
     def alas_update_dashboard(self):
         if not self.visible:
             return
-        clear("dashboard")
         with use_scope("dashboard"):
             if not self._log.display_dashboard:
+                clear("dashboard")
                 self._update_dashboard(num=4, groups_to_display=['Oil','Coin','Gem','Cube'])
             elif self._log.display_dashboard:
+                clear("dashboard")
                 self._update_dashboard()
 
     @use_scope("content", clear=True)
