@@ -2008,6 +2008,16 @@
       "name": "演習",
       "help": "打演習，血量過低時自動撤退"
     },
+    "DelayUntilHoursBeforeNextUpdate": {
+      "name": "推遲演習至下次更新次數前 X 小時",
+      "help": "",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "12": "不推遲"
+    },
     "OpponentChooseMode": {
       "name": "對手選擇模式",
       "help": "",
@@ -2022,7 +2032,7 @@
     },
     "ExercisePreserve": {
       "name": "保留 X 次演習次數",
-      "help": ""
+      "help": "最後一天會强制清空"
     },
     "LowHpThreshold": {
       "name": "血量低於 X 後撤退",
