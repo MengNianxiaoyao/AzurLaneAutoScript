@@ -208,6 +208,7 @@ class GGHandler:
         """
         _disabled_task = deep_get(self.config.data, 'GameManager.GGHandler.DisabledTask')
         """
+            'disable_guild_and_dangerous'
             'disable_all_dangerous_task'
             'disable_meta_and_exercise'
             'disable_exercise'
@@ -228,14 +229,25 @@ class GGHandler:
             'guild'
         ]
         _group_enabled = [
-            'hard',
-            'sos',
-            'war_archives',
+            'main_normal',
+            'main_hard',
+            'main',
+            'main2',
+            'gems_farming',
+            'c72_mystery_farming',
+            'c122_medium_leveling',
+            'c124_large_leveling',
+            'event',
+            'event2',
+            'event3',
             'event_a',
             'event_b',
             'event_c',
             'event_d',
             'event_sp',
+            'war_archives',
+            'hard',
+            'sos',
             'maritime_escort',
             'opsi_explore',
             'opsi_daily',
@@ -247,22 +259,17 @@ class GGHandler:
             'opsi_meowfficer_farming',
             'opsi_hazard1_leveling',
             'opsi_cross_month',
-            'main_normal',
-            'main_hard',
-            'main',
-            'main2',
-            'event',
-            'event2',
-            'event3',
-            'gems_farming',
-            'c72_mystery_farming',
-            'c122_medium_leveling',
-            'c124_large_leveling',
         ]
 
         # Handle ignorance
 
-        if _disabled_task == 'disable_meta_and_exercise':
+        if _disabled_task == 'disable_guild_and_dangerous':
+            _disabled = _group_exercise + _group_meta + _group_raid + _group_personal_choice
+            _enabled = _group_enabled
+        elif _disabled_task == 'disable_all_dangerous_task':
+            _disabled = _group_exercise + _group_meta + _group_raid
+            _enabled = _group_enabled + _group_personal_choice
+        elif _disabled_task == 'disable_meta_and_exercise':
             _disabled = _group_exercise + _group_meta
             _enabled = _group_enabled + _group_raid + _group_personal_choice
         elif _disabled_task == 'disable_exercise':
@@ -271,12 +278,6 @@ class GGHandler:
         elif _disabled_task == 'enable_all':
             _enabled = _group_enabled + _group_personal_choice + _group_raid + _group_meta + _group_exercise
             _disabled = []
-        elif _disabled_task == 'disable_guild_and_dangerous':
-            _disabled = _group_exercise + _group_meta + _group_raid + _group_personal_choice
-            _enabled = _group_enabled
-        else:  # _disabled_task == 'disable_all_dangerous_task':
-            _disabled = _group_exercise + _group_meta + _group_raid
-            _enabled = _group_enabled + _group_personal_choice
 
         if task in _disabled:
             self.check_status(False)
