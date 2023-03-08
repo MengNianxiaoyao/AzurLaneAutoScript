@@ -1210,6 +1210,10 @@ class AlasGUI(Frame):
             ).style("text-align: center")
 
             # show something
+            put_scope(
+                "wiki",
+                put_html('<a href="https://iceynano.github.io/zh/" target="_blank">AzurLaneAutoScript Wiki</a>')
+                ).style("text-align: center")
             put_markdown(
                 """
             Alas is a free open source software, if you paid for Alas from any channel, please refund.
