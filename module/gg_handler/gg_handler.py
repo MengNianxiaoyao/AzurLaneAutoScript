@@ -1,9 +1,9 @@
-from module.gg_handler.gg_data import GGData
-from module.gg_handler.gg_u2 import GGU2
-from module.gg_handler.gg_screenshot import GGScreenshot
-from module.config.utils import deep_get, deep_set
-from module.logger import logger
 from module.base.timer import timeout
+from module.config.utils import deep_get, deep_set
+from module.gg_handler.gg_data import GGData
+from module.gg_handler.gg_screenshot import GGScreenshot
+from module.gg_handler.gg_u2 import GGU2
+from module.logger import logger
 
 
 class GGHandler:
@@ -25,6 +25,7 @@ class GGHandler:
                                default='screenshot')
 
     def restart(self, crashed=False):
+        from module.exception import GameStuckError
         from module.handler.login import LoginHandler
         _crashed = crashed
         for _ in range(2):
@@ -34,7 +35,10 @@ class GGHandler:
                 if not timeout(LoginHandler(config=self.config, device=self.device).app_restart, timeout_sec=600):
                     break
                 raise RuntimeError
+            except GameStuckError as e:
+                pass
             except Exception as e:
+                logger.exception(e)
                 if _crashed:
                     from module.notify import handle_notify
                     handle_notify(self.config.Error_OnePushConfig,

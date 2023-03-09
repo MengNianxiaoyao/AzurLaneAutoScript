@@ -1523,6 +1523,7 @@
       "OpponentChooseMode": "max_exp",
       "OpponentTrial": 1,
       "ExercisePreserve": 0,
+      "EmptyOnceOnSecondFriday": false,
       "LowHpThreshold": 0.4,
       "LowHpConfirmWait": 0.1,
       "OpponentRefreshValue": 0,

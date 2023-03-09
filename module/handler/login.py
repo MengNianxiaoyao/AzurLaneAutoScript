@@ -12,13 +12,13 @@ from module.base.utils import color_similarity_2d, crop, random_rectangle_point
 from module.config.utils import get_server_next_update
 from module.exception import (GameStuckError, GameTooManyClickError,
                               RequestHumanTakeover)
+from module.gg_handler.gg_handler import GGHandler
 from module.handler.assets import *
 from module.logger import logger
 from module.map.assets import *
 from module.ui.assets import *
 from module.ui.page import MAIN_CHECK
 from module.ui.ui import UI
-from module.gg_handler.gg_handler import GGHandler
 
 
 class LoginHandler(UI):
@@ -139,7 +139,7 @@ class LoginHandler(UI):
 
         logger.critical('Login failed more than 3')
         logger.critical('Azur Lane server may be under maintenance, or you may lost network connection')
-        raise RequestHumanTakeover
+        raise GameStuckError
 
     def app_stop(self):
         logger.hr('App stop')
