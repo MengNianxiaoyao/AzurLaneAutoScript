@@ -333,7 +333,6 @@ class GeneratedConfig:
 
     # Group `Hard`
     Hard_HardStage = '11-4'
-    Hard_HardFleet = 1  # 1, 2
 
     # Group `Exercise`
     Exercise_DelayUntilHoursBeforeNextUpdate = 12  # 1, 2, 3, 4, 5, 12

@@ -1990,7 +1990,7 @@
   "Hard": {
     "_info": {
       "name": "Hard Settings",
-      "help": "Hard mode for chapter must be unlocked, stage must be in 100% CLEAR condition, and auto search is enabled temporarily.\nUse Farm Main task to assist unlocking and achieving 100% CLEAR conditions"
+      "help": "Running Hard mode defaults to 100% CLEAR conditions\nIf not 100% CLEAR conditions,fallback to traditional steps to complete the mission"
     },
     "HardStage": {
       "name": "Hard Stage",
