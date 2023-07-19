@@ -68,7 +68,14 @@ class AzurLaneUncensored(LoginHandler):
         logger.hr('Restart AzurLane', level=1)
         self.config.override(Error_HandleError=True)
         self.device.app_stop()
-        self.device.app_start()
+        from module.config.utils import deep_get
+        from module.gg_handler.gg_handler import GGHandler
+        gg_enable = deep_get(self.config.data, 'GameManager.GGHandler.Enabled', default=True)
+        gg_auto = deep_get(self.config.data, 'GameManager.GGHandler.GGFactorEnable', default=True)
+        if (gg_enable == True and gg_auto == True) or gg_enable == True:
+            GGHandler(config=self.config, device=self.device).skip_error()
+        else:
+            self.device.app_start()
         self.handle_app_login()
 
         logger.info('Uncensored Finished')

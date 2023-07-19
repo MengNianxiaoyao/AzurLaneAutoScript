@@ -46,16 +46,20 @@
       "name": "重啟設定",
       "help": ""
     },
+    "MainNormal": {
+      "name": "主線圖-普通",
+      "help": ""
+    },
+    "MainHard": {
+      "name": "主線圖-困難",
+      "help": ""
+    },
     "Main": {
       "name": "主線圖",
       "help": ""
     },
     "Main2": {
       "name": "主線圖-2",
-      "help": ""
-    },
-    "Main3": {
-      "name": "主線圖-3",
       "help": ""
     },
     "GemsFarming": {
@@ -72,6 +76,10 @@
     },
     "Event2": {
       "name": "活動圖-2",
+      "help": ""
+    },
+    "Event3": {
+      "name": "活動圖-3",
       "help": ""
     },
     "Raid": {
@@ -176,6 +184,10 @@
     },
     "Freebies": {
       "name": "免費獎勵",
+      "help": ""
+    },
+    "DashboardUpdate": {
+      "name": "更新儀表盤",
       "help": ""
     },
     "OpsiGeneral": {
@@ -653,6 +665,71 @@
       "retire_10": "退役10個"
     }
   },
+  "GemsFarming": {
+    "_info": {
+      "name": "刷緊急委託",
+      "help": "警告：這個功能可以讓玩家獲取少量的鑽石，但不是一個能高效獲取鑽石的方法\n玩碧藍航線不久的玩家，很容易迷信零破和低耗等，而忽視了角色養成\n執行這個功能只會讓你自己感覺很充實，而你的帳號實際零提升\n這個功能的主要用途，是讓陣容成型的玩家獲取額外的魔方，請理性地把鑽石當作副產物\n\n這個功能將在旗艦32級之後，將旗艦更換為1級白船零破航母\n關於緊急委託刷新機制，可閱讀 https://bbs.nga.cn/read.php?tid=27134956\n委託油耗比: A3 > A1 > 2-4 > 2-1，有活動圖時建議選活動圖，2-1會撿問號有更多物資\n一隊會完成所有的戰鬥，前排應當為百級零破驅逐帶輸出裝，後排應該為35級以下白船零破航母\n二隊會提供跨隊支援，應該有紐澤西和信濃"
+    },
+    "ChangeFlagship": {
+      "name": "更換旗艦",
+      "help": "當旗艦等級>=33或紅臉時更換旗艦\n尋找等級在1-32之間的白皮航母，同時會在退役時選擇更換下來的旗艦。所有等級大於1級的白船航母均會被視為退役目標，請務必鎖定不是目標的船。換船時更換旗艦裝備，這通過記錄之前的裝備完成。\n\n換裝備只會更換正在裝備中的欄位，即使是白裝也會更換。如果指定了旗艦，則會更換全部5個裝備，未指定旗艦隻會更換設備。",
+      "ship": "更換艦船",
+      "ship_equip": "更換艦船 + 裝備"
+    },
+    "ChangeVanguard": {
+      "name": "更換前排",
+      "help": "當前排紅臉時更換前排\n換前排通過找一艘心情不低於10、等級70的白鷹白船驅逐完成，所以盡量保證有足夠多的驅逐。國服則為等級100的白鷹白船驅逐。\n\n換裝備只會更換正在裝備中的欄位，即使是白裝也會更換。如果指定了旗艦，則會更換全部5個裝備，未指定旗艦隻會更換設備。",
+      "disabled": "不更换",
+      "ship": "更換艦船",
+      "ship_equip": "更換艦船 + 裝備"
+    },
+    "ALLowLowVanguardLevel": {
+      "name": "可更換低等級前排",
+      "help": "倍率打開時，前排等級限制改為10以上即可"
+    },
+    "FleetNumberInHardMode": {
+      "name": "困难模式舰队编号",
+      "help": "困难模式（如活动图CD等）下需要更换的舰队编号。\n使用时请保证另一个舰队为6个125级，否则可能会有等级限制出错",
+      "0": "非困难模式",
+      "1": "第一舰队",
+      "2": "第二舰队"
+    },
+    "StopIFAutoNotEnsured": {
+      "name": "无法设置职能时停止任务",
+      "help": "无法设置舰队职能时，用以下方式停止任务以免跨队队伍出击，石油被大量消耗：\n若设置了错误推送则推送任务停止的消息并停止该任务。\n若没有设置错误推送，则直接停止Alas。"
+    },
+    "CommonCV": {
+      "name": "指定旗艦航母",
+      "help": "",
+      "any": "任意",
+      "langley": "蘭利",
+      "bogue": "博格",
+      "ranger": "突擊者",
+      "hermes": "競技神"
+    },
+    "CommissionLimit": {
+      "name": "防止緊急委託數量過多",
+      "help": "在7x24運行時防止緊急委託數量過多做不完每日委託，建議在委託過濾器僅選擇短時長高收益委託"
+    }
+  },
+  "Sos": {
+    "_info": {
+      "name": "潛艇圖",
+      "help": ""
+    },
+    "Chapter": {
+      "name": "潛艇圖出擊章節",
+      "help": "",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "10"
+    }
+  },
   "Campaign": {
     "_info": {
       "name": "地圖設定",
@@ -666,6 +743,7 @@
       "name": "活動名稱",
       "help": "自動選擇至最新的活動圖",
       "campaign_main": "主線圖",
+      "event_20220818_cn": "遠匯點作戰",
       "raid_20230629": "Reflections of the Oasis",
       "event_20220428_cn": "虹彩的終幕曲",
       "event_20210527_cn": "鏡位螺旋",
@@ -696,7 +774,6 @@
       "event_20220915_cn": "Violet Tempest Blooming Lycoris",
       "event_20210916_cn": "碧海光粼",
       "event_20200903_en": "復刻峽灣間的星辰",
-      "event_20220818_cn": "Operation Convergence",
       "event_20220324_cn": "虛像構築之塔",
       "event_20211028_cn": "復刻穹頂下的聖詠曲",
       "event_20220728_cn": "Aquilifers Ballade",
@@ -798,9 +875,9 @@
       "help": "達成地圖 100% 通關、達成三星通關、達成安全海域\n或達成安全海域但不打三星後停止",
       "non_stop": "否",
       "100_percent_clear": "100%通關",
+      "threat_safe_without_3_stars": "100%通關 + 安全海域",
       "map_3_stars": "100%通關 + 三星",
-      "threat_safe": "100%通關 + 三星 + 安全海域",
-      "threat_safe_without_3_stars": "100%通關 + 安全海域"
+      "threat_safe": "100%通關 + 三星 + 安全海域"
     },
     "StageIncrease": {
       "name": "達成地圖成就後前往下一關卡，不停止",
@@ -838,7 +915,7 @@
       "diamond": "輪型陣"
     },
     "Fleet1Mode": {
-      "name": "一隊自律模式",
+      "name": "一隊行動模式",
       "help": "",
       "combat_auto": "自律戰鬥",
       "combat_manual": "手動",
@@ -872,7 +949,7 @@
       "diamond": "輪型陣"
     },
     "Fleet2Mode": {
-      "name": "二隊自律模式",
+      "name": "二隊行動模式",
       "help": "",
       "combat_auto": "自律戰鬥",
       "combat_manual": "手動",
@@ -1112,38 +1189,6 @@
       "5": "5"
     }
   },
-  "GemsFarming": {
-    "_info": {
-      "name": "刷緊急委託",
-      "help": "警告：這個功能可以讓玩家獲取少量的鑽石，但不是一個能高效獲取鑽石的方法\n玩碧藍航線不久的玩家，很容易迷信零破和低耗等，而忽視了角色養成\n執行這個功能只會讓你自己感覺很充實，而你的帳號實際零提升\n這個功能的主要用途，是讓陣容成型的玩家獲取額外的魔方，請理性地把鑽石當作副產物\n\n這個功能將在旗艦32級之後，將旗艦更換為1級白船零破航母\n關於緊急委託刷新機制，可閱讀 https://bbs.nga.cn/read.php?tid=27134956\n委託油耗比: A3 > A1 > 2-4 > 2-1，有活動圖時建議選活動圖，2-1會撿問號有更多物資\n一隊會完成所有的戰鬥，前排應當為百級零破驅逐帶輸出裝，後排應該為35級以下白船零破航母\n二隊會提供跨隊支援，應該有紐澤西和信濃"
-    },
-    "ChangeFlagship": {
-      "name": "更換旗艦",
-      "help": "當旗艦等級>=33或紅臉時更換旗艦\n尋找等級在1-32之間的白皮航母，同時會在退役時選擇更換下來的旗艦。所有等級大於1級的白船航母均會被視為退役目標，請務必鎖定不是目標的船。換船時更換旗艦裝備，這通過記錄之前的裝備完成。\n\n換裝備只會更換正在裝備中的欄位，即使是白裝也會更換。如果指定了旗艦，則會更換全部5個裝備，未指定旗艦隻會更換設備。",
-      "ship": "更換艦船",
-      "ship_equip": "更換艦船 + 裝備"
-    },
-    "ChangeVanguard": {
-      "name": "更換前排",
-      "help": "當前排紅臉時更換前排\n換前排通過找一艘心情不低於10、等級70的白鷹白船驅逐完成，所以盡量保證有足夠多的驅逐。國服則為等級100的白鷹白船驅逐。\n\n換裝備只會更換正在裝備中的欄位，即使是白裝也會更換。如果指定了旗艦，則會更換全部5個裝備，未指定旗艦隻會更換設備。",
-      "disabled": "不更换",
-      "ship": "更換艦船",
-      "ship_equip": "更換艦船 + 裝備"
-    },
-    "CommonCV": {
-      "name": "指定旗艦航母",
-      "help": "",
-      "any": "任意",
-      "langley": "蘭利",
-      "bogue": "博格",
-      "ranger": "突擊者",
-      "hermes": "競技神"
-    },
-    "CommissionLimit": {
-      "name": "防止緊急委託數量過多",
-      "help": "在7x24運行時防止緊急委託數量過多做不完每日委託，建議在委託過濾器僅選擇短時長高收益委託"
-    }
-  },
   "EventGeneral": {
     "_info": {
       "name": "活動通用設置",
@@ -1155,7 +1200,7 @@
     },
     "TimeLimit": {
       "name": "活動時間限制",
-      "help": "當本地時間超過給定數值後，禁用所有活動任務，'2020-01-01 00:00:00' 表示不限制，觸發一次後時間將被重置\n設置後能防止活動結束後忘記關閉任務的事情發生"
+      "help": "當本地時間超過給定數值後，禁用所有活動任務，'2023-01-01 00:00:00' 表示不限制，觸發一次後時間將被重置\n設置後能防止活動結束後忘記關閉任務的事情發生"
     }
   },
   "TaskBalancer": {
@@ -1174,9 +1219,10 @@
     "TaskCall": {
       "name": "物資過低時呼叫任務X",
       "help": "提醒: 玩家需提前設置好被調用的任務，否則將不會作用",
-      "Main": "主線圖",
-      "Main2": "主線圖-2",
-      "Main3": "主線圖-3"
+      "MainNormal": "主線圖-普通",
+      "MainHard": "主線圖-困難",
+      "Main": "主線圖-普通",
+      "Main2": "主線圖-困難"
     }
   },
   "EventDaily": {
@@ -1363,6 +1409,9 @@
       "name": "科研過濾器",
       "help": "科研掉落和項目刷新見 https://azur-stats.lyoko.io/，對這些沒有基本了解的人不建議編寫自定義過濾器，建議使用預優化科研過濾器",
       "custom": "自定義",
+      "series_6_blueprint_203": "六期 藍圖+203",
+      "series_6_blueprint_only": "六期 僅藍圖",
+      "series_6_203_only": "六期 僅203",
       "series_5_blueprint_152": "五期 藍圖+152",
       "series_5_blueprint_only": "五期 僅藍圖",
       "series_5_152_only": "五期 僅152",
@@ -2025,17 +2074,11 @@
   "Hard": {
     "_info": {
       "name": "困難圖",
-      "help": "執行每日困難圖需要解鎖周回模式，未解鎖前則使用主線圖功能"
+      "help": "執行每日困難圖默認為解鎖周回模式，未解鎖前回退到傳統出擊"
     },
     "HardStage": {
       "name": "困難地圖",
       "help": "例如 11-2、12-2、12-4"
-    },
-    "HardFleet": {
-      "name": "出擊艦隊",
-      "help": "",
-      "1": "1",
-      "2": "2"
     }
   },
   "Exercise": {
@@ -2084,22 +2127,16 @@
       "help": ""
     }
   },
-  "Sos": {
+  "DashboardUpdate": {
     "_info": {
-      "name": "潛艇圖",
-      "help": ""
+      "name": "DashboardUpdate._info.name",
+      "help": "DashboardUpdate._info.help"
     },
-    "Chapter": {
-      "name": "潛艇圖出擊章節",
-      "help": "",
-      "3": "3",
-      "4": "4",
-      "5": "5",
-      "6": "6",
-      "7": "7",
-      "8": "8",
-      "9": "9",
-      "10": "10"
+    "Update": {
+      "name": "DashboardUpdate.Update.name",
+      "help": "DashboardUpdate.Update.help",
+      "all": "DashboardUpdate.Update.all",
+      "main": "DashboardUpdate.Update.main"
     }
   },
   "OpsiAshAssist": {
@@ -2198,6 +2235,14 @@
       "2": "2",
       "3": "3",
       "4": "4"
+    },
+    "FleetMode": {
+      "name": "行動模式",
+      "help": "",
+      "combat_auto": "自律戰鬥",
+      "combat_manual": "手動",
+      "stand_still_in_the_middle": "中路站樁",
+      "hide_in_bottom_left": "躲左下角"
     },
     "Submarine": {
       "name": "呼叫潛艇",
@@ -2397,7 +2442,7 @@
     },
     "Repository": {
       "name": "反和諧倉庫",
-      "help": "一般不需要修改\n倉庫 https://github.com/LmeSzinc/AzurLaneUncensored\n國內鏡像(預設) https://e.coding.net/llop18870/alas/AzurLaneUncensored.git"
+      "help": "一般不需要修改\n倉庫(預設) https://github.com/LmeSzinc/AzurLaneUncensored"
     }
   },
   "GameManager": {
@@ -2408,6 +2453,87 @@
     "AutoRestart": {
       "name": "自動登錄",
       "help": "遊戲被強制結束後自動登錄遊戲"
+    }
+  },
+  "GGHandler": {
+    "_info": {
+      "name": "GG管理器",
+      "help": ""
+    },
+    "Enabled": {
+      "name": "启用该功能",
+      "help": "若GG打开则应该启用该功能以达成防弹窗卡重启\n只能使用指定的lua，会自动推送至/sdcard/Alarms/Multiplier.lua\n演习，共斗，Meta信标时会自动关闭倍率"
+    },
+    "GGFactorEnable": {
+      "name": "启用倍率",
+      "help": "总开关，打开后才会开启倍率"
+    },
+    "GGMultiplyingFactor": {
+      "name": "倍率",
+      "help": "默认数值200\n建议数值1-1000，乱输将使用默认倍率运行"
+    },
+    "GGMethod": {
+      "name": "GG操作方法",
+      "help": "使用截图时，将GG悬浮窗遮挡住石油图标(请将透明度调至90%以上)，如为手动还需要指定好lua路径",
+      "screenshot": "截图",
+      "u2": "uiautomator2"
+    },
+    "GGAction": {
+      "name": "倍率操作方式",
+      "help": "如为手动，第一次使用需要指定lua路径\n手动方式可运行自己的lua，但操作逻辑必须和原版一样，否则报错无法运行",
+      "auto": "自动",
+      "manual": "手动"
+    },
+    "GGLuapath": {
+      "name": "lua路径",
+      "help": "填写lua路径，如为自动请勿填入"
+    },
+    "GGLuapathRecord": {
+      "name": "lua路径记录",
+      "help": "第一次启动后将自动勾选，非设备更换、lua路径修改及倍率操作方式切换请勿取消"
+    },
+    "GGPackageName": {
+      "name": "GG包名",
+      "help": "GG安装后请自行前往/Android/data文件夹查看包名，应是com.一串乱码"
+    },
+    "GGWaitTime": {
+      "name": "确认GG面板出现的时间",
+      "help": "设备越卡，重启游戏时GG面板出现的越晚，此时需要设置更长的阈值，单位秒。默认为5秒"
+    },
+    "DisabledTask": {
+      "name": "禁用倍率的项目",
+      "help": "会关闭倍率的项目，建议敏感项目全关。打开的项目导致封号后果自负。\n敏感项目：共斗，Meta与演习",
+      "disable_guild_and_dangerous": "禁用大舰队以及敏感项目",
+      "disable_all_dangerous_task": "禁用敏感项目",
+      "disable_meta_and_exercise": "禁用Meta和演习",
+      "disable_exercise": "禁用演习",
+      "enable_all": "百无禁忌"
+    },
+    "RestartEverytime": {
+      "name": "每次启动Alas时重启",
+      "help": "初始化倍率。防止误操作"
+    },
+    "RestartATX": {
+      "name": "重启ATX和U2",
+      "help": "重启游戏时重启ATX和U2，默认关闭。蓝叠和红手指等环境重启会报错。雷电易丢ATX服务，需要打开"
+    }
+  },
+  "PowerLimit": {
+    "_info": {
+      "name": "戰力限制",
+      "help": "運行敏感項目前的最後一道保險\n若前排戰力高於此值強制重啓"
+    },
+    "Exercise": {
+      "name": "演習",
+      "help": ""
+    },
+    "Raid": {
+      "name": "共鬥",
+      "help": ""
+    },
+    "Ash": {
+      "name": "餘燼信標",
+      "help": ""
     }
   },
   "Storage": {
@@ -2421,6 +2547,10 @@
     }
   },
   "Gui": {
+    "Login": {
+      "Login": "請在下面登錄",
+      "LoginError": "密碼錯誤"
+    },
     "Aside": {
       "Install": "安裝",
       "Home": "主頁",
@@ -2434,6 +2564,8 @@
       "Stop": "停止",
       "ScrollON": "自動滾動 開",
       "ScrollOFF": "自動滾動 關",
+      "DashboardON": "開",
+      "DashboardOFF": "關",
       "ClearLog": "清空日誌",
       "Setting": "設定",
       "CheckUpdate": "檢查更新",
@@ -2445,7 +2577,9 @@
       "DisableTranslateMode": "點擊這裡關閉翻譯模式",
       "ConfigSaved": "設定已儲存",
       "AlasIsRunning": "調度器已在執行中",
-      "ClickToUpdate": "有更新可用，點擊這裡進行更新"
+      "ClickToUpdate": "有更新可用，點擊這裡進行更新",
+      "AlasRestart": "Gui.Toast.AlasRestart",
+      "ReloadEnabled": "Gui.Toast.ReloadEnabled"
     },
     "Status": {
       "Running": "執行中",
@@ -2462,15 +2596,37 @@
       "Translate": "翻譯",
       "Update": "更新器",
       "Remote": "遠程控制",
-      "Utils": "工具"
+      "Utils": "工具",
+      "RaiseException": "抛出異常",
+      "ForceRestart": "强制重啓"
     },
     "Overview": {
       "Scheduler": "調度器",
+      "Dashboard": "儀表盤",
       "Log": "日誌",
       "Running": "執行中",
       "Pending": "佇列中",
       "Waiting": "等待中",
-      "NoTask": "無任務"
+      "NoTask": "無任務",
+      "SecondsAgo": "秒前",
+      "MinutesAgo": "分鐘前",
+      "HoursAgo": "小時前",
+      "DaysAgo": "天前",
+      "MonthsAgo": "月前",
+      "YearsAgo": "年前",
+      "NoData": "無數據",
+      "Oil": "石油",
+      "Coin": "物資",
+      "Gem": "鑽石",
+      "Cube": "魔方",
+      "Pt": "活動PT",
+      "YellowCoin": "大世界黃幣",
+      "PurpleCoin": "大世界紫幣",
+      "ActionPoint": "行動力",
+      "Merit": "功勳",
+      "Medal": "勳章",
+      "Core": "覈心數據",
+      "GuildCoin": "艦隊幣"
     },
     "AddAlas": {
       "PopupTitle": "添加新的設定",

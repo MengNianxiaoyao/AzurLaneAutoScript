@@ -6,6 +6,7 @@ import re
 
 from module.campaign.campaign_base import CampaignBase
 from module.campaign.campaign_event import CampaignEvent
+from module.shop.shop_status import ShopStatus
 from module.campaign.campaign_ui import MODE_SWITCH_1
 from module.config.config import AzurLaneConfig
 from module.exception import CampaignEnd, RequestHumanTakeover, ScriptEnd
@@ -15,7 +16,7 @@ from module.notify import handle_notify
 from module.ui.page import page_campaign
 
 
-class CampaignRun(CampaignEvent):
+class CampaignRun(CampaignEvent, ShopStatus):
     folder: str
     name: str
     stage: str
@@ -75,8 +76,13 @@ class CampaignRun(CampaignEvent):
         # Run count limit
         if self.run_limit and self.config.StopCondition_RunCount <= 0:
             logger.hr('Triggered stop condition: Run count')
-            self.config.StopCondition_RunCount = 0
-            self.config.Scheduler_Enable = False
+            if self.config.Scheduler_Command == "MainHard":
+                self.config.StopCondition_RunCount = 3
+                self.config.Scheduler_Enable = True
+                self.config.task_delay(server_update=True)
+            else:
+                self.config.StopCondition_RunCount = 0
+                self.config.Scheduler_Enable = False
             handle_notify(
                 self.config.Error_OnePushConfig,
                 title=f"Alas <{self.config.config_name}> campaign finished",
@@ -95,10 +101,24 @@ class CampaignRun(CampaignEvent):
             return True
         # Oil limit
         if oil_check:
-            if self.get_oil() < max(500, self.config.StopCondition_OilLimit):
+            # Gem limit
+            self.status_get_gems()
+            # Coin limit
+            self.get_coin()
+            _oil = self.get_oil()
+            if _oil < max(500, self.config.StopCondition_OilLimit):
                 logger.hr('Triggered stop condition: Oil limit')
                 self.config.task_delay(minute=(120, 240))
                 return True
+        # Main_Hard limit
+        if self.config.Scheduler_Command == "MainHard":
+            self.config.StopCondition_RunCount = self.get_main_hard()
+            if self.config.StopCondition_RunCount == 0:
+                self.config.StopCondition_RunCount = 3
+                self.config.Scheduler_Enable = True
+                self.config.task_delay(server_update=True)
+                self.config.task_stop()
+            return True
         # Auto search oil limit
         if self.campaign.auto_search_oil_limit_triggered:
             logger.hr('Triggered stop condition: Auto search oil limit')
@@ -335,6 +355,11 @@ class CampaignRun(CampaignEvent):
             if self.triggered_stop_condition(oil_check=not self.campaign.is_in_auto_search_menu()):
                 break
 
+            # Update config
+            if len(self.config.modified):
+                logger.info('Updating dashboard data')
+                self.config.update()
+
             # Run
             try:
                 self.campaign.run()
@@ -342,6 +367,11 @@ class CampaignRun(CampaignEvent):
                 logger.hr('Script end')
                 logger.info(str(e))
                 break
+
+            # Update config
+            if len(self.campaign.config.modified):
+                logger.info('Updating dashboard data')
+                self.campaign.config.update()
 
             # After run
             self.run_count += 1

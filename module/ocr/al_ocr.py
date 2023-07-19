@@ -37,18 +37,19 @@ class AlOcr(CnOcr):
             root=data_dir(),
             context='cpu',
             name=None,
-    ):
+            ):
         self._args = (model_name, model_epoch, cand_alphabet, root, context, name)
         self._model_loaded = False
 
-    def init(self,
-             model_name='densenet-lite-gru',
-             model_epoch=None,
-             cand_alphabet=None,
-             root=data_dir(),
-             context='cpu',
-             name=None,
-             ):
+    def init(
+            self,
+            model_name='densenet-lite-gru',
+            model_epoch=None,
+            cand_alphabet=None,
+            root=data_dir(),
+            context='cpu',
+            name=None,
+            ):
         """
 
         :param model_name: 模型名称

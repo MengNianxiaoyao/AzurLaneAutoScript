@@ -4,13 +4,18 @@ import cv2
 import numpy as np
 
 from module.base.timer import Timer
-from module.campaign.assets import OCR_EVENT_PT, OCR_COIN, OCR_OIL, OCR_OIL_CHECK
+from module.campaign.assets import OCR_EVENT_PT, OCR_COIN, OCR_OIL, OCR_OIL_CHECK, OCR_COIN_LIMIT, OCR_OIL_LIMIT
 from module.logger import logger
 from module.ocr.ocr import Ocr, Digit
 from module.ui.ui import UI
+from module.log_res import LogRes
+from module.hard.assets import OCR_HARD_REMAIN
 
+OCR_HARD_REMAIN = Digit(OCR_HARD_REMAIN, letter=(123, 227, 66), threshold=128, alphabet='0123')
 OCR_OIL = Digit(OCR_OIL, name='OCR_OIL', letter=(247, 247, 247), threshold=128)
 OCR_COIN = Digit(OCR_COIN, name='OCR_COIN', letter=(239, 239, 239), threshold=128)
+OCR_OIL_LIMIT = Digit(OCR_OIL_LIMIT, name='OCR_OIL_LIMIT', letter=(235, 235, 235), threshold=128)
+OCR_COIN_LIMIT = Digit(OCR_COIN_LIMIT, name='OCR_COIN_LIMIT', letter=(239, 239, 239), threshold=128)
 
 
 class PtOcr(Ocr):
@@ -49,43 +54,19 @@ class CampaignStatus(UI):
         if res:
             pt = int(res.group(1))
             logger.attr('Event_PT', pt)
-            return pt
+            LogRes(self.config).Pt = pt
         else:
             logger.warning(f'Invalid pt result: {pt}')
-            return 0
-
-    def get_coin(self, skip_first_screenshot=True):
-        """
-        Returns:
-            int: Coin amount
-        """
-        amount = 0
-        timeout = Timer(1, count=2).start()
-        while 1:
-            if skip_first_screenshot:
-                skip_first_screenshot = False
-            else:
-                self.device.screenshot()
-
-            if timeout.reached():
-                logger.warning('Get coin timeout')
-                break
-
-            amount = OCR_COIN.ocr(self.device.image)
-            if amount >= 100:
-                break
-
-        return amount
-
-    def _get_oil(self):
-        return OCR_OIL.ocr(self.device.image)
-
+            pt = 0
+        self.config.update()
+        return pt
+    
     def get_oil(self, skip_first_screenshot=True):
         """
         Returns:
             int: Oil amount
         """
-        amount = 0
+        _oil = {}
         timeout = Timer(1, count=2).start()
         while 1:
             if skip_first_screenshot:
@@ -101,8 +82,80 @@ class CampaignStatus(UI):
                 logger.info('No oil icon')
                 continue
 
-            amount = OCR_OIL.ocr(self.device.image)
-            if amount >= 100:
+            _oil = {
+                'Value': OCR_OIL.ocr(self.device.image),
+                'Limit': OCR_OIL_LIMIT.ocr(self.device.image)
+            }
+            if _oil['Value'] >= 100:
+                break
+        LogRes(self.config).Oil = _oil
+        self.config.update()
+
+        return _oil['Value']
+
+    def get_coin(self, skip_first_screenshot=True):
+        """
+        Returns:
+            int: Coin amount
+        """
+        _coin = {}
+        timeout = Timer(1, count=2).start()
+        while 1:
+            if skip_first_screenshot:
+                skip_first_screenshot = False
+            else:
+                self.device.screenshot()
+
+            if timeout.reached():
+                logger.warning('Get coin timeout')
+                break
+
+            _coin = {
+                'Value': OCR_COIN.ocr(self.device.image),
+                'Limit': OCR_COIN_LIMIT.ocr(self.device.image)
+            }
+            if _coin['Value'] >= 100:
+                break
+        LogRes(self.config).Coin = _coin
+        self.config.update()
+
+        return _coin['Value']
+
+    def _get_oil(self):
+        _oil = {
+            'Value': OCR_OIL.ocr(self.device.image),
+            'Limit': OCR_OIL_LIMIT.ocr(self.device.image)
+        }
+        LogRes(self.config).Oil = _oil
+        return _oil['Value']
+ 
+    def _get_coin(self):
+        _coin = {
+            'Value': OCR_COIN.ocr(self.device.image),
+            'Limit': OCR_COIN_LIMIT.ocr(self.device.image)
+        }
+        LogRes(self.config).Coin = _coin
+        return _coin['Value']
+
+    def get_main_hard(self, skip_first_screenshot=True):
+        """
+        Returns:
+            int: main_hard amount
+        """
+        amount = 0
+        timeout = Timer(1, count=2).start()
+        while 1:
+            if skip_first_screenshot:
+                skip_first_screenshot = False
+            else:
+                self.device.screenshot()
+
+            if timeout.reached():
+                logger.warning('Get main_hard timeout')
+                break
+
+            amount = OCR_HARD_REMAIN.ocr(self.device.image)
+            if amount >= 1:
                 break
 
         return amount
@@ -115,6 +168,7 @@ class CampaignStatus(UI):
         tasks = [
             'Event',
             'Event2',
+            'Event3',
             'Raid',
             'GemsFarming',
         ]

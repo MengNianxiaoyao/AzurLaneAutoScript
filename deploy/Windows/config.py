@@ -1,4 +1,5 @@
 import copy
+import locale
 import os
 import subprocess
 from typing import Optional, Union
@@ -82,6 +83,12 @@ class DeployConfig(ConfigModel):
             'https://git.saarcenter.com/LmeSzinc/AzurLaneAutoScript.git',
         ]:
             self.Repository = 'git://git.lyoko.io/AzurLaneAutoScript'
+        Language = re.sub("_","-",locale.getdefaultlocale()[0])
+        if self.Language != Language:
+            if Language not in ['zh-CN','en-US','ja-JP','zh-TW']:
+                self.Language = 'en-US'
+            else:
+                self.Language = Language
         self.write()
         self.show_config()
 

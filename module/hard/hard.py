@@ -2,6 +2,7 @@ import importlib
 
 from campaign.campaign_hard.campaign_hard import Campaign
 from module.campaign.run import CampaignRun
+from module.exception import CampaignEnd, ScriptEnd
 from module.hard.assets import *
 from module.logger import logger
 from module.ocr.ocr import Digit
@@ -19,10 +20,9 @@ class CampaignHard(CampaignRun):
         name = f'campaign_{chapter}_{stage}'
         self.config.override(
             Campaign_Mode='hard',
+            Campaign_UseClearMode=True,
             Campaign_UseFleetLock=True,
             Campaign_UseAutoSearch=True,
-            Fleet_FleetOrder='fleet1_all_fleet2_standby' if self.config.Hard_HardFleet == 1 else 'fleet1_standby_fleet2_all',
-            Emotion_Mode='nothing',  # Dont calculate and dont ignore
         )
         # Equipment take on
         # campaign/campaign_hard/campaign_hard.py Campaign.fleet_preparation()
@@ -33,18 +33,40 @@ class CampaignHard(CampaignRun):
         self.campaign.MAP = module.MAP
 
         # UI ensure
-        self.device.screenshot()
+        self.device.click_record_clear()
+        if not hasattr(self.device, 'image') or self.device.image is None:
+            self.device.screenshot()
+        if not hasattr(self.device, 'image') or self.device.image is None:
+            self.device.screenshot()
         self.campaign.device.image = self.device.image
-        self.campaign.ensure_campaign_ui(
-            name=self.config.Hard_HardStage,
-            mode='hard'
-        )
+        if self.campaign.is_in_map():
+            logger.info('Already in map, retreating.')
+            try:
+                self.campaign.withdraw()
+            except CampaignEnd:
+                pass
+            self.campaign.ensure_campaign_ui(name=self.config.Hard_HardStage, mode='hard')
+        elif self.campaign.is_in_auto_search_menu():
+            if self.can_use_auto_search_continue():
+                    logger.info('In auto search menu, skip ensure_campaign_ui.')
+            else:
+                logger.info('In auto search menu, closing.')
+                self.campaign.ensure_auto_search_exit()
+                self.campaign.ensure_campaign_ui(name=self.config.Hard_HardStage, mode='hard')
+        else:
+            self.campaign.ensure_campaign_ui(name=self.config.Hard_HardStage, mode='hard')
+        self.handle_commission_notice()
 
         # Run
         remain = OCR_HARD_REMAIN.ocr(self.device.image)
         logger.attr('Remain', remain)
         for n in range(remain):
-            self.campaign.run()
+            try:
+                self.campaign.run()
+            except ScriptEnd as e:
+                logger.hr('Script end')
+                logger.info(str(e))
+                break
 
         self.campaign.ensure_auto_search_exit()
         # self.campaign.equipment_take_off_when_finished()

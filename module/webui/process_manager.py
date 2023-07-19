@@ -169,6 +169,7 @@ class ProcessManager:
                 from module.daemon.game_manager import GameManager
 
                 GameManager(config=config_name, task="GameManager").run()
+
             elif func in get_available_mod():
                 mod = load_mod(func)
 

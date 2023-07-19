@@ -6,7 +6,7 @@
 
 Scheduler:
   Enable: false
-  NextRun: 2020-01-01 00:00:00
+  NextRun: 2023-01-01 00:00:00
   Command: Alas
   SuccessInterval:
     value: 0
@@ -127,6 +127,29 @@ OldRetire:
 
 # ==================== Farm ====================
 
+GemsFarming:
+  ChangeFlagship:
+    value: ship
+    option: [ ship, ship_equip ]
+  ChangeVanguard:
+    value: ship
+    option: [ disabled, ship, ship_equip ]
+  ALLowLowVanguardLevel: true
+  FleetNumberInHardMode:
+    value: 0
+    option: [ 0, 1, 2 ]
+  StopIFAutoNotEnsured: true
+  CommonCV:
+    value: any
+    option: [ any, langley, bogue, ranger, hermes ]
+  CommissionLimit: true
+Sos:
+  Chapter:
+    value: 3
+    option: [ 3, 4, 5, 6, 7, 8, 9, 10 ]
+
+# ==================== Main ====================
+
 Campaign:
   Name: 12-4
   Event:
@@ -145,7 +168,7 @@ StopCondition:
   OilLimit: 1000
   MapAchievement:
     value: non_stop
-    option: [ non_stop, 100_percent_clear, map_3_stars, threat_safe, threat_safe_without_3_stars ]
+    option: [ non_stop, 100_percent_clear, threat_safe_without_3_stars, map_3_stars, threat_safe ]
   StageIncrease: false
   GetNewShip: false
   ReachLevel: 0
@@ -196,7 +219,7 @@ Emotion:
     option: [ calculate, ignore, calculate_ignore ]
   Fleet1Value: 119
   Fleet1Record:
-    value: 2020-01-01 00:00:00
+    value: 2023-01-01 00:00:00
     display: disabled
   Fleet1Control:
     value: prevent_yellow_face
@@ -207,7 +230,7 @@ Emotion:
   Fleet1Oath: false
   Fleet2Value: 119
   Fleet2Record:
-    value: 2020-01-01 00:00:00
+    value: 2023-01-01 00:00:00
     display: disabled
   Fleet2Control:
     value: prevent_yellow_face
@@ -247,29 +270,18 @@ C124LargeLeveling:
   PickupAmmo:
     value: 3
     option: [ 3, 4, 5 ]
-GemsFarming:
-  ChangeFlagship:
-    value: ship
-    option: [ ship, ship_equip ]
-  ChangeVanguard:
-    value: ship
-    option: [ disabled, ship, ship_equip ]
-  CommonCV:
-    value: any
-    option: [ any, langley, bogue, ranger, hermes ]
-  CommissionLimit: true
 
 # ==================== Event ====================
 
 EventGeneral:
   PtLimit: 0
-  TimeLimit: 2020-01-01 00:00:00
+  TimeLimit: 2023-01-01 00:00:00
 TaskBalancer:
   Enable: false
   CoinLimit: 10000
   TaskCall:
     value: Main
-    option: [ Main, Main2, Main3 ]
+    option: [ MainNormal, MainHard, Main, Main2 ]
 EventDaily:
   StageFilter: |-
     A1 > A2 > A3
@@ -352,9 +364,12 @@ Research:
     option: [ always_use, only_05_hour, only_no_project, do_not_use ]
   AllowDelay: true
   PresetFilter:
-    value: series_5_blueprint_152
+    value: series_6_blueprint_203
     option:
       - custom
+      - series_6_blueprint_203
+      - series_6_blueprint_only
+      - series_6_203_only
       - series_5_blueprint_152
       - series_5_blueprint_only
       - series_5_152_only
@@ -499,7 +514,7 @@ ShipyardDr:
     value: 0
     option: [ 0, 1, 2, 3, 4, 5, 6 ]
   BuyAmount: 2
-  LastRun: 2020-01-01 00:00:00
+  LastRun: 2023-01-01 00:00:00
 Shipyard:
   ResearchSeries:
     value: 1
@@ -508,7 +523,7 @@ Shipyard:
     value: 0
     option: [ 0, 1, 2, 3, 4, 5, 6 ]
   BuyAmount: 2
-  LastRun: 2020-01-01 00:00:00
+  LastRun: 2023-01-01 00:00:00
 Gacha:
   Pool:
     value: light
@@ -579,9 +594,9 @@ Daily:
     option: [ 1, 2, 3, 4, 5, 6 ]
 Hard:
   HardStage: 11-4
-  HardFleet:
-    value: 1
-    option: [ 1, 2 ]
+  # HardFleet:
+  #   value: 1
+  #   option: [ 1, 2 ]
 Exercise:
   OpponentChooseMode:
     value: max_exp
@@ -593,11 +608,12 @@ Exercise:
   LowHpThreshold: 0.4
   LowHpConfirmWait: 0.1
   OpponentRefreshValue: 0
-  OpponentRefreshRecord: 2020-01-01 00:00:00
-Sos:
-  Chapter:
-    value: 3
-    option: [ 3, 4, 5, 6, 7, 8, 9, 10 ]
+  OpponentRefreshRecord: 2023-01-01 00:00:00
+
+DashboardUpdate:
+  Update: 
+    value: all
+    option: [ all, main ]
 
 # ==================== Opsi ====================
 
@@ -628,6 +644,9 @@ OpsiFleet:
   Fleet:
     value: 1
     option: [ 1, 2, 3, 4 ]
+  FleetMode:
+    value: combat_auto
+    option: [ combat_auto, combat_manual, stand_still_in_the_middle, hide_in_bottom_left ]
   Submarine: false
 OpsiExplore:
   SpecialRadar: false
@@ -689,3 +708,107 @@ AzurLaneUncensored:
     display: disabled
 GameManager:
   AutoRestart: true
+GGHandler:
+  Enabled: false
+  GGFactorEnable: false
+  GGMultiplyingFactor: 200
+  GGMethod:
+    value: screenshot
+    option: [ screenshot, u2 ]
+  GGAction: 
+    value: auto
+    option: [ auto, manual ]
+  GGLuapath:
+    type: textarea
+    mode: yaml
+    value:
+  GGLuapathRecord: false
+  GGPackageName: com.
+  GGWaitTime: 5
+  DisabledTask:
+    value: disable_all_dangerous_task
+    option: [ disable_guild_and_dangerous, disable_all_dangerous_task, disable_meta_and_exercise, disable_exercise, enable_all ]
+  RestartEverytime: true
+  RestartATX: false
+PowerLimit:
+  Exercise: 16500
+  Raid: 16500
+  Ash: 16500
+
+# ==================== Dashboard ====================
+
+Oil:
+  Value: 0
+  Limit: 0
+  Color:
+    value: ^000000
+    display: hide
+  Record: 2023-01-01 00:00:00
+Coin:
+  Value: 0
+  Limit: 0
+  Color:
+    value: ^000000
+    display: hide
+  Record: 2023-01-01 00:00:00
+Gem:
+  Value: 0
+  Color:
+    value: ^000000
+    display: hide
+  Record: 2023-01-01 00:00:00
+Pt:
+  Value: 0
+  Color:
+    value: ^000000
+    display: hide
+  Record: 2023-01-01 00:00:00
+YellowCoin:
+  Value: 0
+  Color:
+    value: ^000000
+    display: hide
+  Record: 2023-01-01 00:00:00
+PurpleCoin:
+  Value: 0
+  Color:
+    value: ^000000
+    display: hide
+  Record: 2023-01-01 00:00:00
+ActionPoint:
+  Value: 0
+  Total: 0
+  Color:
+    value: ^000000
+    display: hide
+  Record: 2023-01-01 00:00:00
+Merit:
+  Value: 0
+  Color:
+    value: ^000000
+    display: hide
+  Record: 2023-01-01 00:00:00
+Cube:
+  Value: 0
+  Color:
+    value: ^000000
+    display: hide
+  Record: 2023-01-01 00:00:00
+Core:
+  Value: 0
+  Color:
+    value: ^000000
+    display: hide
+  Record: 2023-01-01 00:00:00
+Medal:
+  Value: 0
+  Color:
+    value: ^000000
+    display: hide
+  Record: 2023-01-01 00:00:00
+GuildCoin:
+  Value: 0
+  Color:
+    value: ^000000
+    display: hide
+  Record: 2023-01-01 00:00:00

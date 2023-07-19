@@ -12,9 +12,10 @@
     "menu": "collapse",
     "page": "setting",
     "tasks": [
+      "MainNormal",
+      "MainHard",
       "Main",
       "Main2",
-      "Main3",
       "GemsFarming"
     ]
   },
@@ -25,6 +26,7 @@
       "EventGeneral",
       "Event",
       "Event2",
+      "Event3",
       "Raid",
       "Coalition",
       "MaritimeEscort",
@@ -68,7 +70,8 @@
       "ShopOnce",
       "Shipyard",
       "Gacha",
-      "Freebies"
+      "Freebies",
+      "DashboardUpdate"
     ]
   },
   "Opsi": {

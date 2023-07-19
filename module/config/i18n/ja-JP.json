@@ -46,16 +46,20 @@
       "name": "再起動設定",
       "help": ""
     },
+    "MainNormal": {
+      "name": "メイン海域(Normal)",
+      "help": ""
+    },
+    "MainHard": {
+      "name": "メイン海域(Hard)",
+      "help": ""
+    },
     "Main": {
       "name": "メイン海域",
       "help": ""
     },
     "Main2": {
       "name": "メイン海域-2",
-      "help": ""
-    },
-    "Main3": {
-      "name": "メイン海域-3",
       "help": ""
     },
     "GemsFarming": {
@@ -72,6 +76,10 @@
     },
     "Event2": {
       "name": "イベント海域-2",
+      "help": ""
+    },
+    "Event3": {
+      "name": "イベント海域-3",
       "help": ""
     },
     "Raid": {
@@ -176,6 +184,10 @@
     },
     "Freebies": {
       "name": "他ギフト",
+      "help": ""
+    },
+    "DashboardUpdate": {
+      "name": "Dashboard Update",
       "help": ""
     },
     "OpsiGeneral": {
@@ -653,6 +665,71 @@
       "retire_10": "retire_10"
     }
   },
+  "GemsFarming": {
+    "_info": {
+      "name": "GemsFarming._info.name",
+      "help": "GemsFarming._info.help"
+    },
+    "ChangeFlagship": {
+      "name": "GemsFarming.ChangeFlagship.name",
+      "help": "GemsFarming.ChangeFlagship.help",
+      "ship": "ship",
+      "ship_equip": "ship_equip"
+    },
+    "ChangeVanguard": {
+      "name": "GemsFarming.ChangeVanguard.name",
+      "help": "GemsFarming.ChangeVanguard.help",
+      "disabled": "disabled",
+      "ship": "ship",
+      "ship_equip": "ship_equip"
+    },
+    "ALLowLowVanguardLevel": {
+      "name": "ALLow Low Vanguard Level",
+      "help": "Destroyers over level 10 will now be used, 49 for Event CD"
+    },
+    "FleetNumberInHardMode": {
+      "name": "Fleet number used in hard mode",
+      "help": "Fleet number used in hard mode like Event C/D",
+      "0": "Not a hard mode",
+      "1": "Fleet 1",
+      "2": "Fleet 2"
+    },
+    "StopIFAutoNotEnsured": {
+      "name": "GemsFarming.StopIFAutoNotEnsured.name",
+      "help": "GemsFarming.StopIFAutoNotEnsured.help"
+    },
+    "CommonCV": {
+      "name": "GemsFarming.CommonCV.name",
+      "help": "GemsFarming.CommonCV.help",
+      "any": "any",
+      "langley": "langley",
+      "bogue": "bogue",
+      "ranger": "ranger",
+      "hermes": "hermes"
+    },
+    "CommissionLimit": {
+      "name": "GemsFarming.CommissionLimit.name",
+      "help": "GemsFarming.CommissionLimit.help"
+    }
+  },
+  "Sos": {
+    "_info": {
+      "name": "Sos._info.name",
+      "help": "Sos._info.help"
+    },
+    "Chapter": {
+      "name": "Sos.Chapter.name",
+      "help": "Sos.Chapter.help",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "10"
+    }
+  },
   "Campaign": {
     "_info": {
       "name": "Campaign._info.name",
@@ -666,6 +743,7 @@
       "name": "Campaign.Event.name",
       "help": "Campaign.Event.help",
       "campaign_main": "campaign_main",
+      "event_20220818_cn": "結像点作戦",
       "raid_20230629": "緑地伽話",
       "event_20220428_cn": "吟ずる瑠璃の楽章",
       "event_20210527_cn": "照らす螺旋の鏡海（復刻）",
@@ -696,7 +774,6 @@
       "event_20220915_cn": "赫の涙月 菫の暁風",
       "event_20210916_cn": "駆けよ 碧海の吹き風",
       "event_20200903_en": "輝ける峡湾の星（復刻）",
-      "event_20220818_cn": "結像点作戦",
       "event_20220324_cn": "幻像の塔",
       "event_20211028_cn": "神穹を衝く聖歌（復刻）",
       "event_20220728_cn": "鋼鷲の冒険譚",
@@ -798,9 +875,9 @@
       "help": "StopCondition.MapAchievement.help",
       "non_stop": "non_stop",
       "100_percent_clear": "100_percent_clear",
+      "threat_safe_without_3_stars": "threat_safe_without_3_stars",
       "map_3_stars": "map_3_stars",
-      "threat_safe": "threat_safe",
-      "threat_safe_without_3_stars": "threat_safe_without_3_stars"
+      "threat_safe": "threat_safe"
     },
     "StageIncrease": {
       "name": "StopCondition.StageIncrease.name",
@@ -838,8 +915,8 @@
       "diamond": "diamond"
     },
     "Fleet1Mode": {
-      "name": "Fleet.Fleet1Mode.name",
-      "help": "Fleet.Fleet1Mode.help",
+      "name": "Fleet1 Action Mode",
+      "help": "",
       "combat_auto": "combat_auto",
       "combat_manual": "combat_manual",
       "stand_still_in_the_middle": "stand_still_in_the_middle",
@@ -872,8 +949,8 @@
       "diamond": "diamond"
     },
     "Fleet2Mode": {
-      "name": "Fleet.Fleet2Mode.name",
-      "help": "Fleet.Fleet2Mode.help",
+      "name": "Fleet2 Action Mode",
+      "help": "",
       "combat_auto": "combat_auto",
       "combat_manual": "combat_manual",
       "stand_still_in_the_middle": "stand_still_in_the_middle",
@@ -1112,38 +1189,6 @@
       "5": "5"
     }
   },
-  "GemsFarming": {
-    "_info": {
-      "name": "GemsFarming._info.name",
-      "help": "GemsFarming._info.help"
-    },
-    "ChangeFlagship": {
-      "name": "GemsFarming.ChangeFlagship.name",
-      "help": "GemsFarming.ChangeFlagship.help",
-      "ship": "ship",
-      "ship_equip": "ship_equip"
-    },
-    "ChangeVanguard": {
-      "name": "GemsFarming.ChangeVanguard.name",
-      "help": "GemsFarming.ChangeVanguard.help",
-      "disabled": "disabled",
-      "ship": "ship",
-      "ship_equip": "ship_equip"
-    },
-    "CommonCV": {
-      "name": "GemsFarming.CommonCV.name",
-      "help": "GemsFarming.CommonCV.help",
-      "any": "any",
-      "langley": "langley",
-      "bogue": "bogue",
-      "ranger": "ranger",
-      "hermes": "hermes"
-    },
-    "CommissionLimit": {
-      "name": "GemsFarming.CommissionLimit.name",
-      "help": "GemsFarming.CommissionLimit.help"
-    }
-  },
   "EventGeneral": {
     "_info": {
       "name": "EventGeneral._info.name",
@@ -1174,9 +1219,10 @@
     "TaskCall": {
       "name": "TaskBalancer.TaskCall.name",
       "help": "TaskBalancer.TaskCall.help",
+      "MainNormal": "MainNormal",
+      "MainHard": "MainHard",
       "Main": "Main",
-      "Main2": "Main2",
-      "Main3": "Main3"
+      "Main2": "Main2"
     }
   },
   "EventDaily": {
@@ -1363,6 +1409,9 @@
       "name": "Research.PresetFilter.name",
       "help": "Research.PresetFilter.help",
       "custom": "custom",
+      "series_6_blueprint_203": "series_6_blueprint_203",
+      "series_6_blueprint_only": "series_6_blueprint_only",
+      "series_6_203_only": "series_6_203_only",
       "series_5_blueprint_152": "series_5_blueprint_152",
       "series_5_blueprint_only": "series_5_blueprint_only",
       "series_5_152_only": "series_5_152_only",
@@ -2030,12 +2079,6 @@
     "HardStage": {
       "name": "Hard.HardStage.name",
       "help": "Hard.HardStage.help"
-    },
-    "HardFleet": {
-      "name": "Hard.HardFleet.name",
-      "help": "Hard.HardFleet.help",
-      "1": "1",
-      "2": "2"
     }
   },
   "Exercise": {
@@ -2084,22 +2127,16 @@
       "help": "Exercise.OpponentRefreshRecord.help"
     }
   },
-  "Sos": {
+  "DashboardUpdate": {
     "_info": {
-      "name": "Sos._info.name",
-      "help": "Sos._info.help"
+      "name": "DashboardUpdate._info.name",
+      "help": "DashboardUpdate._info.help"
     },
-    "Chapter": {
-      "name": "Sos.Chapter.name",
-      "help": "Sos.Chapter.help",
-      "3": "3",
-      "4": "4",
-      "5": "5",
-      "6": "6",
-      "7": "7",
-      "8": "8",
-      "9": "9",
-      "10": "10"
+    "Update": {
+      "name": "DashboardUpdate.Update.name",
+      "help": "DashboardUpdate.Update.help",
+      "all": "DashboardUpdate.Update.all",
+      "main": "DashboardUpdate.Update.main"
     }
   },
   "OpsiAshAssist": {
@@ -2198,6 +2235,14 @@
       "2": "2",
       "3": "3",
       "4": "4"
+    },
+    "FleetMode": {
+      "name": "Action Mode",
+      "help": "",
+      "combat_auto": "combat_auto",
+      "combat_manual": "combat_manual",
+      "stand_still_in_the_middle": "stand_still_in_the_middle",
+      "hide_in_bottom_left": "hide_in_bottom_left"
     },
     "Submarine": {
       "name": "OpsiFleet.Submarine.name",
@@ -2410,6 +2455,87 @@
       "help": "GameManager.AutoRestart.help"
     }
   },
+  "GGHandler": {
+    "_info": {
+      "name": "GG管理器",
+      "help": ""
+    },
+    "Enabled": {
+      "name": "启用该功能",
+      "help": "若GG打开则应该启用该功能以达成防弹窗卡重启\n只能使用指定的lua，会自动推送至/sdcard/Alarms/Multiplier.lua\n演习，共斗，Meta信标时会自动关闭倍率"
+    },
+    "GGFactorEnable": {
+      "name": "启用倍率",
+      "help": "总开关，打开后才会开启倍率"
+    },
+    "GGMultiplyingFactor": {
+      "name": "倍率",
+      "help": "默认数值200\n建议数值1-1000，乱输将使用默认倍率运行"
+    },
+    "GGMethod": {
+      "name": "GG操作方法",
+      "help": "使用截图时，将GG悬浮窗遮挡住石油图标(请将透明度调至90%以上)，如为手动还需要指定好lua路径",
+      "screenshot": "截图",
+      "u2": "uiautomator2"
+    },
+    "GGAction": {
+      "name": "倍率操作方式",
+      "help": "如为手动，第一次使用需要指定lua路径\n手动方式可运行自己的lua，但操作逻辑必须和原版一样，否则报错无法运行",
+      "auto": "自动",
+      "manual": "手动"
+    },
+    "GGLuapath": {
+      "name": "lua路径",
+      "help": "填写lua路径，如为自动请勿填入"
+    },
+    "GGLuapathRecord": {
+      "name": "lua路径记录",
+      "help": "第一次启动后将自动勾选，非设备更换、lua路径修改及倍率操作方式切换请勿取消"
+    },
+    "GGPackageName": {
+      "name": "GG包名",
+      "help": "GG安装后请自行前往/Android/data文件夹查看包名，应是com.一串乱码"
+    },
+    "GGWaitTime": {
+      "name": "确认GG面板出现的时间",
+      "help": "设备越卡，重启游戏时GG面板出现的越晚，此时需要设置更长的阈值，单位秒。默认为5秒"
+    },
+    "DisabledTask": {
+      "name": "禁用倍率的项目",
+      "help": "会关闭倍率的项目，建议敏感项目全关。打开的项目导致封号后果自负。\n敏感项目：共斗，Meta与演习",
+      "disable_guild_and_dangerous": "禁用大舰队以及敏感项目",
+      "disable_all_dangerous_task": "禁用敏感项目",
+      "disable_meta_and_exercise": "禁用Meta和演习",
+      "disable_exercise": "禁用演习",
+      "enable_all": "百无禁忌"
+    },
+    "RestartEverytime": {
+      "name": "每次启动Alas时重启",
+      "help": "初始化倍率。防止误操作"
+    },
+    "RestartATX": {
+      "name": "重启ATX和U2",
+      "help": "重启游戏时重启ATX和U2，默认关闭。蓝叠和红手指等环境重启会报错。雷电易丢ATX服务，需要打开"
+    }
+  },
+  "PowerLimit": {
+    "_info": {
+      "name": "PowerLimit._info.name",
+      "help": "PowerLimit._info.help"
+    },
+    "Exercise": {
+      "name": "PowerLimit.Exercise.name",
+      "help": "PowerLimit.Exercise.help"
+    },
+    "Raid": {
+      "name": "PowerLimit.Raid.name",
+      "help": "PowerLimit.Raid.help"
+    },
+    "Ash": {
+      "name": "PowerLimit.Ash.name",
+      "help": "PowerLimit.Ash.help"
+    }
+  },
   "Storage": {
     "_info": {
       "name": "Storage._info.name",
@@ -2421,6 +2547,10 @@
     }
   },
   "Gui": {
+    "Login": {
+      "Login": "Please login below.",
+      "LoginError": "Wrong password!"
+    },
     "Aside": {
       "Install": "インストール",
       "Home": "Gui.Aside.Home",
@@ -2434,6 +2564,8 @@
       "Stop": "中止",
       "ScrollON": "自動スクロール ON",
       "ScrollOFF": "自動スクロール OFF",
+      "DashboardON": "Fold",
+      "DashboardOFF": "Unfold",
       "ClearLog": "ログクリーニング",
       "Setting": "設定",
       "CheckUpdate": "アップデータチェック",
@@ -2445,7 +2577,9 @@
       "DisableTranslateMode": "クリックして翻訳モードを中止します",
       "ConfigSaved": "コンフィグ設定は保存されました",
       "AlasIsRunning": "スケジューラーはもう実行しています",
-      "ClickToUpdate": "新しいアップデータがあります。クリックしてアップデータ"
+      "ClickToUpdate": "新しいアップデータがあります。クリックしてアップデータ",
+      "AlasRestart": "Alas will restart in 3 seconds",
+      "ReloadEnabled": "Reload not enabled"
     },
     "Status": {
       "Running": "実行中",
@@ -2462,15 +2596,37 @@
       "Translate": "翻訳",
       "Update": "アップデータ",
       "Remote": "遠隔操作",
-      "Utils": "ツール"
+      "Utils": "ツール",
+      "RaiseException": "Raise Exception",
+      "ForceRestart": "Force Restart"
     },
     "Overview": {
       "Scheduler": "スケジューラー",
+      "Dashboard": "ダッシュボード",
       "Log": "ログ",
       "Running": "実行中",
       "Pending": "隊列中",
       "Waiting": "Waiting",
-      "NoTask": "No Task"
+      "NoTask": "No Task",
+      "SecondsAgo": "Seconds ago",
+      "MinutesAgo": "Minutes ago",
+      "HoursAgo": "Hours ago",
+      "DaysAgo": "Days ago",
+      "MonthsAgo": "Months ago",
+      "YearsAgo": "Years ago",
+      "NoData": "No data",
+      "Oil": "Oil",
+      "Coin": "Coin",
+      "Gem": "Gem",
+      "Cube": "Cube",
+      "Pt": "Event Pt",
+      "YellowCoin": "Operation Supply Coin",
+      "PurpleCoin": "Special Item Token",
+      "ActionPoint": "Action Point",
+      "Merit": "Merit",
+      "Medal": "Medal",
+      "Core": "Core Data",
+      "GuildCoin": "Guild Coin"
     },
     "AddAlas": {
       "PopupTitle": "新しいコンフィグを追加",

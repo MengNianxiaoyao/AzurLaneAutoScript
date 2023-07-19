@@ -11,7 +11,7 @@ class GeneratedConfig:
 
     # Group `Scheduler`
     Scheduler_Enable = False
-    Scheduler_NextRun = datetime.datetime(2020, 1, 1, 0, 0)
+    Scheduler_NextRun = datetime.datetime(2023, 1, 1, 0, 0)
     Scheduler_Command = 'Alas'
     Scheduler_SuccessInterval = 0
     Scheduler_FailureInterval = 120
@@ -76,6 +76,18 @@ class GeneratedConfig:
     OldRetire_SSR = False
     OldRetire_RetireAmount = 'retire_all'  # retire_all, retire_10
 
+    # Group `GemsFarming`
+    GemsFarming_ChangeFlagship = 'ship'  # ship, ship_equip
+    GemsFarming_ChangeVanguard = 'ship'  # disabled, ship, ship_equip
+    GemsFarming_ALLowLowVanguardLevel = True
+    GemsFarming_FleetNumberInHardMode = 0  # 0, 1, 2
+    GemsFarming_StopIFAutoNotEnsured = True
+    GemsFarming_CommonCV = 'any'  # any, langley, bogue, ranger, hermes
+    GemsFarming_CommissionLimit = True
+
+    # Group `Sos`
+    Sos_Chapter = 3  # 3, 4, 5, 6, 7, 8, 9, 10
+
     # Group `Campaign`
     Campaign_Name = '12-4'
     Campaign_Event = 'campaign_main'  # campaign_main
@@ -89,7 +101,7 @@ class GeneratedConfig:
     # Group `StopCondition`
     StopCondition_RunCount = 0
     StopCondition_OilLimit = 1000
-    StopCondition_MapAchievement = 'non_stop'  # non_stop, 100_percent_clear, map_3_stars, threat_safe, threat_safe_without_3_stars
+    StopCondition_MapAchievement = 'non_stop'  # non_stop, 100_percent_clear, threat_safe_without_3_stars, map_3_stars, threat_safe
     StopCondition_StageIncrease = False
     StopCondition_GetNewShip = False
     StopCondition_ReachLevel = 0
@@ -114,12 +126,12 @@ class GeneratedConfig:
     # Group `Emotion`
     Emotion_Mode = 'calculate'  # calculate, ignore, calculate_ignore
     Emotion_Fleet1Value = 119
-    Emotion_Fleet1Record = datetime.datetime(2020, 1, 1, 0, 0)
+    Emotion_Fleet1Record = datetime.datetime(2023, 1, 1, 0, 0)
     Emotion_Fleet1Control = 'prevent_yellow_face'  # keep_exp_bonus, prevent_green_face, prevent_yellow_face, prevent_red_face
     Emotion_Fleet1Recover = 'not_in_dormitory'  # not_in_dormitory, dormitory_floor_1, dormitory_floor_2
     Emotion_Fleet1Oath = False
     Emotion_Fleet2Value = 119
-    Emotion_Fleet2Record = datetime.datetime(2020, 1, 1, 0, 0)
+    Emotion_Fleet2Record = datetime.datetime(2023, 1, 1, 0, 0)
     Emotion_Fleet2Control = 'prevent_yellow_face'  # keep_exp_bonus, prevent_green_face, prevent_yellow_face, prevent_red_face
     Emotion_Fleet2Recover = 'not_in_dormitory'  # not_in_dormitory, dormitory_floor_1, dormitory_floor_2
     Emotion_Fleet2Oath = False
@@ -151,20 +163,14 @@ class GeneratedConfig:
     C124LargeLeveling_NonLargeRetreatTolerance = 1  # 0, 1, 2, 10
     C124LargeLeveling_PickupAmmo = 3  # 3, 4, 5
 
-    # Group `GemsFarming`
-    GemsFarming_ChangeFlagship = 'ship'  # ship, ship_equip
-    GemsFarming_ChangeVanguard = 'ship'  # disabled, ship, ship_equip
-    GemsFarming_CommonCV = 'any'  # any, langley, bogue, ranger, hermes
-    GemsFarming_CommissionLimit = True
-
     # Group `EventGeneral`
     EventGeneral_PtLimit = 0
-    EventGeneral_TimeLimit = datetime.datetime(2020, 1, 1, 0, 0)
+    EventGeneral_TimeLimit = datetime.datetime(2023, 1, 1, 0, 0)
 
     # Group `TaskBalancer`
     TaskBalancer_Enable = False
     TaskBalancer_CoinLimit = 10000
-    TaskBalancer_TaskCall = 'Main'  # Main, Main2, Main3
+    TaskBalancer_TaskCall = 'Main'  # MainNormal, MainHard, Main, Main2
 
     # Group `EventDaily`
     EventDaily_StageFilter = 'A1 > A2 > A3'
@@ -208,7 +214,7 @@ class GeneratedConfig:
     Research_UseCoin = 'always_use'  # always_use, only_05_hour, only_no_project, do_not_use
     Research_UsePart = 'always_use'  # always_use, only_05_hour, only_no_project, do_not_use
     Research_AllowDelay = True
-    Research_PresetFilter = 'series_5_blueprint_152'  # custom, series_5_blueprint_152, series_5_blueprint_only, series_5_152_only, series_4_blueprint_tenrai, series_4_blueprint_only, series_4_tenrai_only, series_3_blueprint_234, series_3_blueprint_only, series_3_234_only, series_2_than_3_457_234, series_2_blueprint_457, series_2_blueprint_only, series_2_457_only
+    Research_PresetFilter = 'series_6_blueprint_203'  # custom, series_6_blueprint_203, series_6_blueprint_only, series_6_203_only, series_5_blueprint_152, series_5_blueprint_only, series_5_152_only, series_4_blueprint_tenrai, series_4_blueprint_only, series_4_tenrai_only, series_3_blueprint_234, series_3_blueprint_only, series_3_234_only, series_2_than_3_457_234, series_2_blueprint_457, series_2_blueprint_only, series_2_457_only
     Research_CustomFilter = 'S5-DR0.5 > S5-PRY0.5 > S5-H0.5 > S5-Q0.5 > S5-DR2.5 > 0.5 > S5-G1.5\n> S5-Q1 > S5-DR5 > S5-DR8 > S5-G4 > S5-PRY2.5 > 1 > S5-Q2 > reset\n> S5-G2.5 > S5-PRY5 > S5-PRY8 > 1.5 > 2 > S5-Q4 > 2.5 > 3\n> Q4 > G4 > 4 > 5 > S5-C6 > C6 > 6 > S5-C8 > 8\n> S5-C12 > 12'
 
     # Group `Dorm`
@@ -289,13 +295,13 @@ class GeneratedConfig:
     ShipyardDr_ResearchSeries = 2  # 2
     ShipyardDr_ShipIndex = 0  # 0, 1, 2, 3, 4, 5, 6
     ShipyardDr_BuyAmount = 2
-    ShipyardDr_LastRun = datetime.datetime(2020, 1, 1, 0, 0)
+    ShipyardDr_LastRun = datetime.datetime(2023, 1, 1, 0, 0)
 
     # Group `Shipyard`
     Shipyard_ResearchSeries = 1  # 1, 2, 3
     Shipyard_ShipIndex = 0  # 0, 1, 2, 3, 4, 5, 6
     Shipyard_BuyAmount = 2
-    Shipyard_LastRun = datetime.datetime(2020, 1, 1, 0, 0)
+    Shipyard_LastRun = datetime.datetime(2023, 1, 1, 0, 0)
 
     # Group `Gacha`
     Gacha_Pool = 'light'  # light, heavy, special, event, wishing_well
@@ -337,7 +343,6 @@ class GeneratedConfig:
 
     # Group `Hard`
     Hard_HardStage = '11-4'
-    Hard_HardFleet = 1  # 1, 2
 
     # Group `Exercise`
     Exercise_OpponentChooseMode = 'max_exp'  # max_exp, easiest, leftmost, easiest_else_exp
@@ -346,10 +351,10 @@ class GeneratedConfig:
     Exercise_LowHpThreshold = 0.4
     Exercise_LowHpConfirmWait = 0.1
     Exercise_OpponentRefreshValue = 0
-    Exercise_OpponentRefreshRecord = datetime.datetime(2020, 1, 1, 0, 0)
+    Exercise_OpponentRefreshRecord = datetime.datetime(2023, 1, 1, 0, 0)
 
-    # Group `Sos`
-    Sos_Chapter = 3  # 3, 4, 5, 6, 7, 8, 9, 10
+    # Group `DashboardUpdate`
+    DashboardUpdate_Update = 'all'  # all, main
 
     # Group `OpsiAshAssist`
     OpsiAshAssist_Tier = 15
@@ -374,6 +379,7 @@ class GeneratedConfig:
 
     # Group `OpsiFleet`
     OpsiFleet_Fleet = 1  # 1, 2, 3, 4
+    OpsiFleet_FleetMode = 'combat_auto'  # combat_auto, combat_manual, stand_still_in_the_middle, hide_in_bottom_left
     OpsiFleet_Submarine = False
 
     # Group `OpsiExplore`
@@ -429,6 +435,88 @@ class GeneratedConfig:
 
     # Group `GameManager`
     GameManager_AutoRestart = True
+
+    # Group `GGHandler`
+    GGHandler_Enabled = False
+    GGHandler_GGFactorEnable = False
+    GGHandler_GGMultiplyingFactor = 200
+    GGHandler_GGMethod = 'screenshot'  # screenshot, u2
+    GGHandler_GGAction = 'auto'  # auto, manual
+    GGHandler_GGLuapath = None
+    GGHandler_GGLuapathRecord = False
+    GGHandler_GGPackageName = 'com.'
+    GGHandler_GGWaitTime = 5
+    GGHandler_DisabledTask = 'disable_all_dangerous_task'  # disable_guild_and_dangerous, disable_all_dangerous_task, disable_meta_and_exercise, disable_exercise, enable_all
+    GGHandler_RestartEverytime = True
+    GGHandler_RestartATX = False
+
+    # Group `PowerLimit`
+    PowerLimit_Exercise = 16500
+    PowerLimit_Raid = 16500
+    PowerLimit_Ash = 16500
+
+    # Group `Oil`
+    Oil_Value = 0
+    Oil_Limit = 0
+    Oil_Color = '^000000'
+    Oil_Record = datetime.datetime(2023, 1, 1, 0, 0)
+
+    # Group `Coin`
+    Coin_Value = 0
+    Coin_Limit = 0
+    Coin_Color = '^000000'
+    Coin_Record = datetime.datetime(2023, 1, 1, 0, 0)
+
+    # Group `Gem`
+    Gem_Value = 0
+    Gem_Color = '^000000'
+    Gem_Record = datetime.datetime(2023, 1, 1, 0, 0)
+
+    # Group `Pt`
+    Pt_Value = 0
+    Pt_Color = '^000000'
+    Pt_Record = datetime.datetime(2023, 1, 1, 0, 0)
+
+    # Group `YellowCoin`
+    YellowCoin_Value = 0
+    YellowCoin_Color = '^000000'
+    YellowCoin_Record = datetime.datetime(2023, 1, 1, 0, 0)
+
+    # Group `PurpleCoin`
+    PurpleCoin_Value = 0
+    PurpleCoin_Color = '^000000'
+    PurpleCoin_Record = datetime.datetime(2023, 1, 1, 0, 0)
+
+    # Group `ActionPoint`
+    ActionPoint_Value = 0
+    ActionPoint_Total = 0
+    ActionPoint_Color = '^000000'
+    ActionPoint_Record = datetime.datetime(2023, 1, 1, 0, 0)
+
+    # Group `Merit`
+    Merit_Value = 0
+    Merit_Color = '^000000'
+    Merit_Record = datetime.datetime(2023, 1, 1, 0, 0)
+
+    # Group `Cube`
+    Cube_Value = 0
+    Cube_Color = '^000000'
+    Cube_Record = datetime.datetime(2023, 1, 1, 0, 0)
+
+    # Group `Core`
+    Core_Value = 0
+    Core_Color = '^000000'
+    Core_Record = datetime.datetime(2023, 1, 1, 0, 0)
+
+    # Group `Medal`
+    Medal_Value = 0
+    Medal_Color = '^000000'
+    Medal_Record = datetime.datetime(2023, 1, 1, 0, 0)
+
+    # Group `GuildCoin`
+    GuildCoin_Value = 0
+    GuildCoin_Color = '^000000'
+    GuildCoin_Record = datetime.datetime(2023, 1, 1, 0, 0)
 
     # Group `Storage`
     Storage_Storage = {}

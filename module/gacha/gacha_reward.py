@@ -8,6 +8,7 @@ from module.logger import logger
 from module.ocr.ocr import Digit
 from module.retire.retirement import Retirement
 from module.shop.shop_general import GeneralShop
+from module.log_res import LogRes
 
 RECORD_GACHA_OPTION = ('RewardRecord', 'gacha')
 RECORD_GACHA_SINCE = (0,)
@@ -120,6 +121,8 @@ class RewardGacha(GachaUI, GeneralShop, Retirement):
         logger.info(f'Able to submit up to {target_count} build orders')
         self._currency -= gold_total
         self.build_cube_count -= cube_total
+        LogRes(self.config).Cube = self.build_cube_count
+        self.config.update()
         return target_count
 
     def gacha_goto_pool(self, target_pool):
@@ -197,15 +200,18 @@ class RewardGacha(GachaUI, GeneralShop, Retirement):
         confirm_mode = True  # Drill, Lock Ship
         # Clear button offset, or will click at the PLUS button of gems or HOME button
         STORY_SKIP.clear_offset()
+        queue_clean = True
         while 1:
             if skip_first_screenshot:
                 skip_first_screenshot = False
             else:
                 self.device.screenshot()
 
-            if self.appear(BUILD_QUEUE_EMPTY, offset=(20, 20)):
+            if self.appear(BUILD_QUEUE_EMPTY, offset=(20, 20)) and queue_clean:
                 self.gacha_side_navbar_ensure(upper=1)
                 break
+            else:
+                queue_clean = False
             
             if self.appear_then_click(BUILD_FINISH_ORDERS, interval=3):
                 confirm_timer.reset()
@@ -281,15 +287,15 @@ class RewardGacha(GachaUI, GeneralShop, Retirement):
         # Go to Gacha
         self.ui_goto_gacha()
 
+        # OCR Gold and Cubes
+        self.shop_currency()
+        self.build_cube_count = OCR_BUILD_CUBE_COUNT.ocr(self.device.image)
+
         # Flush queue of any pre-existing
         # builds to ensure starting fresh
         # Upon exit, expected to be in
         # main Build page
         self.gacha_flush_queue()
-
-        # OCR Gold and Cubes
-        self.shop_currency()
-        self.build_cube_count = OCR_BUILD_CUBE_COUNT.ocr(self.device.image)
 
         # Transition to appropriate target construction pool
         # Returns appropriate costs for gacha as well

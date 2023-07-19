@@ -148,7 +148,20 @@ class Raid(MapOperation, RaidCombat, CampaignEvent):
             fleet_index (int):
         """
         logger.info('Combat preparation.')
+
+        # Power limit check
+        from module.gg_handler.gg_handler import GGHandler
+        from module.config.utils import deep_get
+        gg_enable = deep_get(d=self.config.data, keys='GameManager.GGHandler.Enabled')
+        gg_auto = deep_get(d=self.config.data, keys='GameManager.GGHandler.GGFactorEnable')
+        if (gg_enable == True and gg_auto == True) or gg_enable == True:
+            if GGHandler(config=self.config, device=self.device).power_limit('Raid') == True:
+                self.config.task_delay(minute=0.5)
+                self.config.task_call('Restart')
+                self.config.task_stop()
+
         skip_first_screenshot = True
+
         # No need, already waited in `raid_execute_once()`
         # if emotion_reduce:
         #     self.emotion.wait(fleet_index)
@@ -243,9 +256,9 @@ class Raid(MapOperation, RaidCombat, CampaignEvent):
                 break
 
     def raid_expected_end(self):
-        if self.appear_then_click(RAID_REWARDS, offset=(30,30), interval=3):
+        if self.appear_then_click(RAID_REWARDS, offset=(30, 30), interval=3):
             return False
-        return self.appear(RAID_CHECK, offset=(30,30))
+        return self.appear(RAID_CHECK, offset=(30, 30))
 
     def raid_execute_once(self, mode, raid):
         """
@@ -288,6 +301,7 @@ class Raid(MapOperation, RaidCombat, CampaignEvent):
         Pages:
             in: page_raid
         """
+        from module.log_res import LogRes
         skip_first_screenshot = True
         timeout = Timer(1.5, count=5).start()
         ocr = pt_ocr(self.config.Campaign_Event)
@@ -302,10 +316,12 @@ class Raid(MapOperation, RaidCombat, CampaignEvent):
                 pt = ocr.ocr(self.device.image)
                 if timeout.reached():
                     logger.warning('Wait PT timeout, assume it is')
+                    LogRes(self.config).Pt = pt
                     return pt
                 if pt in [70000, 70001]:
                     continue
                 else:
+                    LogRes(self.config).Pt = pt
                     return pt
         else:
             logger.info(f'Raid {self.config.Campaign_Event} does not support PT ocr, skip')
