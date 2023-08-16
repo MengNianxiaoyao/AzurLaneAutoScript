@@ -67,7 +67,7 @@ class Meta(UI, MapEventHandler):
 
 
 def _server_support():
-    return server.server in ['cn', 'en', 'jp']
+    return server.server in ['cn', 'en', 'jp','tw']
 
 
 def _server_support_dossier_auto_attack():
@@ -75,7 +75,8 @@ def _server_support_dossier_auto_attack():
 
 
 class OpsiAshBeacon(Meta):
-    _meta_receive_count = 0
+    _meta_receive = 0
+    _meta_category = 0
 
     def _attack_meta(self, skip_first_screenshot=True):
         """
@@ -98,7 +99,10 @@ class OpsiAshBeacon(Meta):
             if MetaState.UNDEFINED == state:
                 continue
             if MetaState.INIT == state:
-                if self._begin_meta():
+                category = self._begin_meta()
+                if category != 0:
+                    if category in [1, 2, 3]:
+                        self._meta_category = category
                     continue
                 else:
                     # Normal finish
@@ -111,7 +115,7 @@ class OpsiAshBeacon(Meta):
                     continue
             if MetaState.COMPLETE == state:
                 self._handle_ash_beacon_reward()
-                self._meta_receive_count += 1
+                self._meta_receive = self._meta_receive | self._meta_category
                 # Check other tasks after kill a meta
                 self.config.check_task_switch()
                 continue
@@ -347,6 +351,13 @@ class OpsiAshBeacon(Meta):
             select beacon or dossier entrance into if needed, or end task
         In beacon or dossier:
             begin a new meta if needed, or back to meta main page
+        
+        Returns:
+            0: No meta
+            1: Beacon Meta
+            2: Dossier Meta
+            3: Already chosen
+            4: Unknown page
         """
         # Page meta main
         if self.appear(ASH_SHOWDOWN, offset=(30, 30), interval=2):
@@ -354,27 +365,22 @@ class OpsiAshBeacon(Meta):
             if self._check_beacon_point():
                 self.device.click(META_MAIN_BEACON_ENTRANCE)
                 logger.info('Select beacon entrance into')
-                return True
+                return 1
             # Dossier
             if _server_support() \
                     and self.config.OpsiAshBeacon_AttackMode == 'current_dossier' \
                     and self._check_dossier_point():
                 if self.appear_then_click(META_MAIN_DOSSIER_ENTRANCE, offset=(20, 20), interval=2):
                     logger.info('Select dossier entrance into')
-                    return True
+                    return 2
                 else:
                     logger.info('None dossier has been selected')
-            return False
+            return 0
         # Page beacon
         elif self.appear(BEACON_LIST, offset=(20, 20), interval=2):
             if self._check_beacon_point():
                 self.device.click(META_BEGIN_ENTRANCE)
                 logger.info('Begin a beacon')
-            else:
-                # TW only support current meta
-                if server.server == 'tw':
-                    return False
-                self.appear_then_click(ASH_QUIT, offset=(10, 10), interval=2)
             return True
         # Page dossier
         elif _server_support() \
@@ -383,14 +389,14 @@ class OpsiAshBeacon(Meta):
                     and self._check_dossier_point():
                 if self.appear_then_click(META_BEGIN_ENTRANCE, offset=(20, 20), interval=2):
                     logger.info('Begin a dossier')
-                    return True
+                    return 2
                 else:
                     logger.info('None dossier has been selected')
             self.appear_then_click(ASH_QUIT, offset=(10, 10), interval=2)
-            return True
+            return 3
         # UnKnown Page
         else:
-            return True
+            return 4
 
     def _check_beacon_point(self) -> bool:
         if self.appear(META_BEACON_FLAG, offset=(180, 20)):
@@ -441,6 +447,22 @@ class OpsiAshBeacon(Meta):
             if self.appear_then_click(META_ENTRANCE, offset=(20, 300), interval=2):
                 continue
 
+    def ensure_dossier_page(self):
+        self.ui_ensure(page_reward)
+        self._ensure_meta_page()
+        logger.info('Ensure dossier meta page')
+        while 1:
+            self.device.screenshot()
+            
+            if self.appear(DOSSIER_LIST, offset=(20, 20)):
+                logger.info('In dossier page')
+                return True
+            if self.handle_map_event():
+                continue
+            if self.appear(ASH_SHOWDOWN, offset=(30, 30)):
+                self.device.click(META_MAIN_DOSSIER_ENTRANCE)
+                continue
+
     def _begin_beacon(self):
         logger.hr('Meta Beacon Attack')
         if not _server_support():
@@ -453,8 +475,11 @@ class OpsiAshBeacon(Meta):
         self._begin_beacon()
 
         with self.config.multi_set():
-            if self._meta_receive_count > 0:
+            if self._meta_receive & 1 == 1:
                 MetaReward(self.config, self.device).run()
+            if self._meta_receive & 2 == 2:
+                MetaReward(self.config, self.device).run(category=2)
+            self._meta_receive = 0
             self.config.task_delay(server_update=True)
 
 
@@ -583,7 +608,7 @@ class AshBeaconAssist(Meta):
         self.ui_ensure(page_reward)
 
         if self._begin_meta_assist():
-            MetaReward(self.config, self.device).run(dossier=False)
+            MetaReward(self.config, self.device).run()
             self.config.task_delay(server_update=True)
         else:
             self.config.task_delay(minute=(10, 20))
