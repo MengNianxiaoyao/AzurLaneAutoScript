@@ -1,5 +1,6 @@
 import uiautomator2 as u2
 from module.base.timer import Timer
+from module.handler.assets import LOGIN_CHECK
 from module.gg_handler.assets import *
 from module.ui.assets import *
 from module.meowfficer.assets import *
@@ -133,6 +134,8 @@ class GGScreenshot(Base):
             else:
                 self.device.sleep(0.5)
                 self.device.screenshot()
+            if self.appear_then_click(LOGIN_CHECK, offset=(30, 30)):
+                continue
             if self.appear(BUTTON_GG_CONFIRM, offset=(50, 50)):
                 logger.hr('Enter GG')
                 logger.info('Entered GG')

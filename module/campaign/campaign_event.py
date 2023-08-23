@@ -94,7 +94,8 @@ class CampaignEvent(CampaignStatus):
             in: page_event or page_sp
         """
         limit = self.config.TaskBalancer_CoinLimit
-        coin = self.get_coin()
+        coin = self._get_coin()
+        logger.attr('Coin Count', coin)
         # Check Coin
         if coin == 0:
             # Avoid wrong/zero OCR result
