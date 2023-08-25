@@ -190,6 +190,10 @@
       "name": "Dashboard Update",
       "help": ""
     },
+    "Minigame": {
+      "name": "Minigame",
+      "help": ""
+    },
     "OpsiGeneral": {
       "name": "OpSi General",
       "help": ""
@@ -1927,6 +1931,16 @@
       "4": "Friday",
       "5": "Saturday",
       "6": "Sunday"
+    }
+  },
+  "Minigame": {
+    "_info": {
+      "name": "Minigame._info.name",
+      "help": "Minigame._info.help"
+    },
+    "Collect": {
+      "name": "Minigame.Collect.name",
+      "help": "Minigame.Collect.help"
     }
   },
   "Daily": {

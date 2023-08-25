@@ -276,6 +276,8 @@ DailyMission:
     DashboardUpdate:
       - Scheduler
       - DashboardUpdate
+    Minigame:
+      - Scheduler
 
 # ==================== Opsi ====================
 
