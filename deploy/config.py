@@ -128,7 +128,7 @@ class DeployConfig(ConfigModel):
         if self.Repository in ['cn']:
             super().__setattr__('Repository', 'git://git.lyoko.io/AzurLaneAutoScript')
         if self.PypiMirror in [
-            'https://pypi.tuna.tsinghua.edu.cn/simple'
+            'https://mirrors.aliyun.com/pypi/simple'
         ]:
             super().__setattr__('PypiMirror', 'https://mirrors.aliyun.com/pypi/simple')
 

@@ -13,7 +13,7 @@ Process: [ 5% ]
 ==================== SHOW DEPLOY CONFIG ====================
 Repository: https://e.coding.net/llop18870/alas/AzurLaneAutoScript.git
 Branch: feature
-PypiMirror: https://pypi.tuna.tsinghua.edu.cn/simple
+PypiMirror: https://mirrors.aliyun.com/pypi/simple
 Language: zh-CN
 Rest of the configs are the same as default
 Process: [ 10% ]

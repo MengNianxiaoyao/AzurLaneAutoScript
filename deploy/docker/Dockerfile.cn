@@ -23,7 +23,7 @@ deb-src https://mirrors.aliyun.com/debian/ bullseye-backports main non-free cont
  && git config --global --add safe.directory '*' \
  && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
  && echo 'Asia/Shanghai' > /etc/timezone \
- && pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
+ && pip config set global.index-url https://mirrors.aliyun.com/pypi/simple \
  && pip install -r /tmp/requirements.txt \
  && rm /tmp/requirements.txt \
  && rm -r ~/.cache/pip
