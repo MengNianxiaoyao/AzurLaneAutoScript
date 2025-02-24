@@ -173,6 +173,13 @@ class InfoHandler(ModuleBase):
             if not self.device.app_is_running():
                 logger.error('Detected hot fixes from game server, game died')
                 raise GameNotRunningError
+            # Use template match without color match due to maintenance popup
+            if self.appear(LOGIN_CHECK, offset=(30, 30)):
+                logger.error('Account logged out, '
+                             'probably because account kicked by server maintenance or another log in')
+                # Kill game, because game patches after maintenance can only be downloaded at game startup
+                self.device.app_stop()
+                raise GameNotRunningError
             self._hot_fix_check_wait.clear()
 
         return appear
@@ -446,6 +453,10 @@ class InfoHandler(ModuleBase):
             return True
 
         return False
+
+    def story_skip_interval_clear(self):
+        self.interval_clear(STORY_SKIP_3)
+        self.interval_clear(STORY_LETTERS_ONLY)
 
     def handle_story_skip(self, drop=None):
         # Rerun events in clear mode but still have stories.

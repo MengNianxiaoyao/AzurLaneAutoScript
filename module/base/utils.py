@@ -497,6 +497,22 @@ def location2node(location):
     return col2name(x) + str(y)
 
 
+def xywh2xyxy(area):
+    """
+    Convert (x, y, width, height) to (x1, y1, x2, y2)
+    """
+    x, y, w, h = area
+    return x, y, x + w, y + h
+
+
+def xyxy2xywh(area):
+    """
+    Convert (x1, y1, x2, y2) to (x, y, width, height)
+    """
+    x1, y1, x2, y2 = area
+    return min(x1, x2), min(y1, y2), abs(x2 - x1), abs(y2 - y1)
+
+
 def load_image(file, area=None):
     """
     Load an image like pillow and drop alpha channel.
@@ -714,7 +730,7 @@ def get_bbox(image, threshold=0):
     return x[0], y[0], x[-1] + 1, y[-1] + 1
 
 
-def get_bbox_reversed(image, threshold=0):
+def get_bbox_reversed(image, threshold=255):
     """
     Similar to `get_bbox` but for black contents on white background.
 

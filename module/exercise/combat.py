@@ -29,7 +29,9 @@ class ExerciseCombat(HpDaemon, OpponentChoose, ExerciseEquipment, Combat):
                 continue
 
             # End
-            if self.is_combat_executing():
+            pause = self.is_combat_executing()
+            if pause:
+                logger.attr('BattleUI', pause)
                 break
 
     def _combat_execute(self):
@@ -53,6 +55,8 @@ class ExerciseCombat(HpDaemon, OpponentChoose, ExerciseEquipment, Combat):
 
             p = self.is_combat_executing()
             if p:
+                if end:
+                    end = False
                 if pause is None:
                     pause = p
             else:
