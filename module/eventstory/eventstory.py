@@ -102,7 +102,10 @@ class EventStory(CampaignUI, Combat, LoginHandler):
                 self.app_start()
                 continue
             if result == 'finish':
-                break
+                # Run after finished event story, in order to close GET_ITEMS
+                logger.hr('Event story finish', level=2)
+                self.ui_goto_main()
+                self.ui_goto_event_story()
 
     def get_event_story_state(self):
         """
@@ -124,6 +127,10 @@ class EventStory(CampaignUI, Combat, LoginHandler):
         return 'unknown'
 
     def run(self):
+        if not self.device.app_is_running():
+            logger.warning('Game is not running, start it')
+            self.app_start()
+
         self.run_event_story()
 
         # Scheduler

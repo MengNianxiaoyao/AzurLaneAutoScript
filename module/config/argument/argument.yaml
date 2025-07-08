@@ -302,12 +302,14 @@ Raid:
 RaidDaily:
   StageFilter: |-
     hard > normal > easy
+Hospital:
+  UseRecommendFleet: true
 MaritimeEscort:
   Enable: true
 Coalition:
   Mode:
     value: hard
-    option: [ easy, normal, hard, ex ]
+    option: [ easy, normal, hard, sp, ex ]
   Fleet:
     value: single
     option: [ single, multi ]
@@ -734,6 +736,11 @@ Daemon:
 OpsiDaemon:
   RepairShip: true
   SelectEnemy: true
+EventStory:
+  SkipBattle:
+    type: checkbox
+    value: false
+    option: [ true, false ]
 Benchmark:
   DeviceType:
     value: emulator
