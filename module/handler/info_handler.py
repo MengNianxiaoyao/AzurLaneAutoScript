@@ -435,8 +435,10 @@ class InfoHandler(ModuleBase):
                 if drop:
                     drop.handle_add(self, before=2)
                 if self.config.STORY_ALLOW_SKIP:
+                    logger.info(f'{STORY_SKIP_3} -> {STORY_SKIP}')
                     self.device.click(STORY_SKIP)
                 else:
+                    logger.info(f'{STORY_SKIP_3} -> {OS_CLICK_SAFE_AREA}')
                     self.device.click(OS_CLICK_SAFE_AREA)
                 self._story_confirm.reset()
                 self.story_popup_timeout.reset()
@@ -508,3 +510,42 @@ class InfoHandler(ModuleBase):
             return True
 
         return False
+
+    """
+    Manjuu loading
+    """
+    def manjuu_count(self):
+        """
+        detect manjuu count by template matching
+        Returns:
+            int: Number of manjuu
+        """
+        image = self.image_crop(MANJUU_AREA, copy=False)
+        # Default 0.85 will not work for manjuu, because the face will be stretched
+        # and shrinked, so the template will not match.
+        # Use 0.8 to match the deformed face.
+        buttons = TEMPLATE_MANJUU.match_multi(image, similarity=0.8, name='INFO_MANJUU')
+        return len(buttons)
+
+    def wait_until_manjuu_disappear(self):
+        """
+        Wait until manjuu loading disappear.
+        """
+        while 1:
+            self.device.screenshot()
+            if not self.manjuu_count():
+                break
+    
+    def handle_manjuu(self):
+        """
+        Handle manjuu loading.
+        Returns:
+            bool: If handled
+        """
+        count = self.manjuu_count()
+        if count > 2:
+            logger.info(f'Manjuu count: {count}, waiting for manjuu to disappear')
+            self.wait_until_manjuu_disappear()
+            return True
+        else:
+            return False

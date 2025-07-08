@@ -11,7 +11,7 @@ import numpy as np
 from module.base.decorator import cached_property, del_cached_property, has_cached_property
 from module.base.timer import Timer
 from module.base.utils import ensure_time
-from module.config.utils import deep_get
+from module.config.deep import deep_get
 from module.device.env import IS_WINDOWS
 from module.device.method.minitouch import insert_swipe, random_rectangle_point
 from module.device.method.pool import JobTimeout, WORKER_POOL
@@ -219,7 +219,30 @@ class NemuIpcImpl:
         self.instance_id: int = instance_id
         self.display_id: int = display_id
 
-        ipc_dll = os.path.abspath(os.path.join(nemu_folder, './shell/sdk/external_renderer_ipc.dll'))
+        # try to load dll from various path
+        list_dll = [
+            # MuMuPlayer12
+            os.path.abspath(os.path.join(nemu_folder, './shell/sdk/external_renderer_ipc.dll')),
+            # MuMuPlayer12 5.0
+            os.path.abspath(os.path.join(nemu_folder, './nx_device/12.0/shell/sdk/external_renderer_ipc.dll')),
+        ]
+        self.lib = None
+        for ipc_dll in list_dll:
+            if not os.path.exists(ipc_dll):
+                continue
+            try:
+                self.lib = ctypes.CDLL(ipc_dll)
+                break
+            except OSError as e:
+                logger.error(e)
+                logger.error(f'ipc_dll={ipc_dll} exists, but cannot be loaded')
+                continue
+        if self.lib is None:
+            # not found
+            raise NemuIpcIncompatible(
+                f'NemuIpc requires MuMu12 version >= 3.8.13, please check your version. '
+                f'None of the following path exists: {list_dll}')
+        # success
         logger.info(
             f'NemuIpcImpl init, '
             f'nemu_folder={nemu_folder}, '
@@ -227,19 +250,6 @@ class NemuIpcImpl:
             f'instance_id={instance_id}, '
             f'display_id={display_id}'
         )
-
-        try:
-            self.lib = ctypes.CDLL(ipc_dll)
-        except OSError as e:
-            logger.error(e)
-            # OSError: [WinError 126] 找不到指定的模块。
-            if not os.path.exists(ipc_dll):
-                raise NemuIpcIncompatible(
-                    f'ipc_dll={ipc_dll} does not exist, '
-                    f'NemuIpc requires MuMu12 version >= 3.8.13, please check your version')
-            else:
-                raise NemuIpcIncompatible(
-                    f'ipc_dll={ipc_dll} exists, but cannot be loaded')
         self.connect_id: int = 0
         self.width = 0
         self.height = 0
@@ -476,7 +486,7 @@ class NemuIpc(Platform):
                         instance_id=index,
                         display_id=0
                     ).__enter__()
-                except (NemuIpcIncompatible, NemuIpcError) as e:
+                except (NemuIpcIncompatible, NemuIpcError, JobTimeout) as e:
                     logger.error(e)
                     logger.error('Emulator info incorrect')
 
@@ -495,7 +505,7 @@ class NemuIpc(Platform):
                 instance_id=self.emulator_instance.MuMuPlayer12_id,
                 display_id=0
             ).__enter__()
-        except (NemuIpcIncompatible, NemuIpcError) as e:
+        except (NemuIpcIncompatible, NemuIpcError, JobTimeout) as e:
             logger.error(e)
             logger.error('Unable to initialize NemuIpc')
             raise RequestHumanTakeover
@@ -505,11 +515,15 @@ class NemuIpc(Platform):
             return False
         if not self.is_mumu_family:
             return False
-        # >= 4.0 has no info in getprop
         if self.nemud_player_version == '':
-            return True
-        if self.nemud_app_keep_alive == '':
-            return False
+            # >= 4.0 has no info in getprop
+            # Try initializing nemu_ipc for final check
+            pass
+        else:
+            # Having version, probably MuMu6 or MuMu12 version 3.x
+            if self.nemud_app_keep_alive == '':
+                # Empty property, probably MuMu6 or MuMu12 version < 3.5.6
+                return False
         try:
             _ = self.nemu_ipc
         except RequestHumanTakeover:
@@ -540,6 +554,7 @@ class NemuIpc(Platform):
         logger.attr('customer.app_keptlive', value)
         if str(value).lower() == 'true':
             # https://mumu.163.com/help/20230802/35047_1102450.html
+            logger.critical('Please turn off "Keep alive in the background" in the settings or MuMuPlayer')
             logger.critical('请在MuMu模拟器设置内关闭 "后台挂机时保活运行"')
             raise RequestHumanTakeover
         return True
@@ -562,7 +577,7 @@ class NemuIpc(Platform):
             logger.warning('Failed to check check_mumu_app_keep_alive as emulator_instance is None')
             return False
         name = self.emulator_instance.name
-        file = self.emulator_instance.emulator.abspath(f'../vms/{name}/configs/customer_config.json')
+        file = self.emulator_instance.mumu_vms_config('customer_config.json')
         if self.check_mumu_app_keep_alive_400(file):
             return True
 

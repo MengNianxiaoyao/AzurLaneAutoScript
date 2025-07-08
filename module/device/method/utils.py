@@ -238,6 +238,11 @@ def handle_adb_error(e):
         # Raised by uiautomator2 when current adb service is killed by another version of adb service.
         logger.error(e)
         return True
+    elif text == 'rest':
+        # AdbError(rest)
+        # Response telling adbd service has reset, client should reconnect
+        logger.error(e)
+        return True
     else:
         # AdbError()
         logger.exception(e)
@@ -326,27 +331,30 @@ def remove_shell_warning(s):
     """
     Remove warnings from shell
 
+    Warnings in VMOS shell
+    https://github.com/LmeSzinc/AzurLaneAutoScript/issues/1425
+    WARNING: linker: [vdso]: unused DT entry: type 0x70000001 arg 0x0\n\x89PNG\r\n\x1a\n\x00\x00\x00\rIH
+
+    Errors in waydroid screencap render
+    https://github.com/LmeSzinc/AzurLaneAutoScript/issues/4760
+    Failed to create //.cache for shader cache (Read-only file system)---disabling.\n
+
     Args:
         s (str, bytes):
 
     Returns:
         str, bytes:
     """
-    # WARNING: linker: [vdso]: unused DT entry: type 0x70000001 arg 0x0\n\x89PNG\r\n\x1a\n\x00\x00\x00\rIH
     if isinstance(s, bytes):
         if s.startswith(b'WARNING'):
-            try:
-                s = s.split(b'\n', maxsplit=1)[1]
-            except IndexError:
-                pass
-        return s
-        # return re.sub(b'^WARNING.+\n', b'', s)
+            _, _, s = s.partition(b'\n')
+        if s.startswith(b'Failed'):
+            _, _, s = s.partition(b'\n')
     elif isinstance(s, str):
         if s.startswith('WARNING'):
-            try:
-                s = s.split('\n', maxsplit=1)[1]
-            except IndexError:
-                pass
+            _, _, s = s.partition('\n')
+        if s.startswith('Failed'):
+            _, _, s = s.partition('\n')
     return s
 
 

@@ -154,6 +154,27 @@ class FleetOperator:
                 main.device.click(self._clear)
                 click_timer.reset()
 
+    def recommend(self, skip_first_screenshot=True):
+        """
+        Recommend fleet
+        """
+        main = self.main
+        click_timer = Timer(3, count=6)
+        while 1:
+            if skip_first_screenshot:
+                skip_first_screenshot = False
+            else:
+                main.device.screenshot()
+
+            # End
+            if self.in_use():
+                break
+
+            # Click
+            if click_timer.reached():
+                main.device.click(self._choose)
+                click_timer.reset()
+
     def open(self, skip_first_screenshot=True):
         """
         Activate dropdown menu for fleet selection.
@@ -319,7 +340,11 @@ class FleetPreparation(InfoHandler):
             return False
 
         # Submarine.
-        if submarine.allow():
+        # cache submarine.allow() to avoid inconsistency after setting fleet_2
+        # because the expanded fleet_2 may cover submarine buttons
+        map_allow_submarine = submarine.allow()
+        logger.attr('map_allow_submarine', map_allow_submarine)
+        if map_allow_submarine:
             if self.config.Submarine_Fleet:
                 submarine.ensure_to_be(self.config.Submarine_Fleet)
             else:
@@ -343,11 +368,13 @@ class FleetPreparation(InfoHandler):
             fleet_1.ensure_to_be(self.config.Fleet_Fleet1)
 
         # Check if submarine is empty again.
-        if submarine.allow():
+        if map_allow_submarine:
             if self.config.Submarine_Fleet:
                 pass
             else:
                 submarine.clear()
+        else:
+            self.config.SUBMARINE = 0
 
         if self.appear(FLEET_1_CLEAR, offset=(-20, -80, 20, 5)):
             AUTO_SEARCH_SET_MOB.load_offset(FLEET_1_CLEAR)

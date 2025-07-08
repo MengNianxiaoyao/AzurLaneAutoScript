@@ -24,11 +24,12 @@
     "page": "setting",
     "tasks": [
       "EventGeneral",
+      "Coalition",
       "Event",
       "Event2",
       "Event3",
       "Raid",
-      "Coalition",
+      "Hospital",
       "MaritimeEscort",
       "WarArchives"
     ]
@@ -37,13 +38,13 @@
     "menu": "collapse",
     "page": "setting",
     "tasks": [
+      "CoalitionSp",
       "EventA",
       "EventB",
       "EventC",
       "EventD",
       "EventSp",
-      "RaidDaily",
-      "CoalitionSp"
+      "RaidDaily"
     ]
   },
   "Reward": {
@@ -103,6 +104,7 @@
     "tasks": [
       "Daemon",
       "OpsiDaemon",
+      "EventStory",
       "Benchmark",
       "AzurLaneUncensored",
       "GameManager",

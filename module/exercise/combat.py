@@ -62,6 +62,13 @@ class ExerciseCombat(HpDaemon, OpponentChoose, ExerciseEquipment, Combat):
         while 1:
             self.device.screenshot()
 
+            # End
+            if self._in_exercise() or self.appear(BATTLE_PREPARATION, offset=(20, 20)):
+                logger.hr('Combat end')
+                if not end:
+                    logger.warning('Combat ended without end conditions detected')
+                break
+
             p = self.is_combat_executing()
             if p:
                 if end:
@@ -117,12 +124,17 @@ class ExerciseCombat(HpDaemon, OpponentChoose, ExerciseEquipment, Combat):
                         show_hp_timer.reset()
                         self._show_hp()
 
-            # End
-            if self._in_exercise() or self.appear(BATTLE_PREPARATION, offset=(20, 20)):
-                logger.hr('Combat end')
-                if not end:
-                    logger.warning('Combat ended without end conditions detected')
-                break
+            # bunch of popup handlers
+            if self.handle_popup_confirm('EXERCISE_COMBAT_EXECUTE'):
+                continue
+            if self.handle_urgent_commission():
+                continue
+            if self.handle_guild_popup_cancel():
+                continue
+            if self.handle_vote_popup():
+                continue
+            if self.handle_mission_popup_ack():
+                continue
 
         return success
 

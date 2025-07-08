@@ -103,6 +103,20 @@ class Combat(Level, HPBalancer, Retirement, SubmarineCall, CombatAuto, CombatMan
             return PAUSE_Cyber
         if PAUSE_HolyLight.match_template_color(self.device.image, offset=(10, 10)):
             return PAUSE_HolyLight
+        # PAUSE_Pharaoh has random animation, assets should avoid the area in the middle and use match_luma
+        if PAUSE_Pharaoh.match_luma(self.device.image, offset=(10, 10)):
+            return PAUSE_Pharaoh
+        # PAUSE_Star may get detected as PAUSE_Nurse, should before it
+        if PAUSE_Star.match_luma(self.device.image, offset=(10, 10)):
+            return PAUSE_Star
+        if PAUSE_Nurse.match_luma(self.device.image, offset=(10, 10)):
+            return PAUSE_Nurse
+        # PAUSE_Devil is in red
+        if PAUSE_Devil.match_template_color(self.device.image, offset=(10, 10)):
+            return PAUSE_Devil
+        # PAUSE_Seaside is in light blue
+        if PAUSE_Seaside.match_template_color(self.device.image, offset=(10, 10)):
+            return PAUSE_Seaside
         return False
 
     def handle_combat_quit(self, offset=(20, 20), interval=3):
@@ -123,11 +137,29 @@ class Combat(Level, HPBalancer, Retirement, SubmarineCall, CombatAuto, CombatMan
             return True
         # Battle UI PAUSE_Neon uses QUIT_New
         # Battle UI PAUSE_Cyber uses QUIT_New
+        # [TW] QUIT_New is in bold and PAUSE_Cyber is regular weight
+        if QUIT_Cyber.match_luma(self.device.image, offset=offset):
+            self.device.click(QUIT_Cyber)
+            timer.reset()
+            return True
         if QUIT_Christmas.match_luma(self.device.image, offset=offset):
             self.device.click(QUIT_Christmas)
             timer.reset()
             return True
         # Battle UI PAUSE_HolyLight uses QUIT_New
+        if QUIT_Pharaoh.match_luma(self.device.image, offset=offset):
+            self.device.click(QUIT_Pharaoh)
+            timer.reset()
+            return True
+        if QUIT_Nurse.match_luma(self.device.image, offset=offset):
+            self.device.click(QUIT_Nurse)
+            timer.reset()
+            return True
+        # Battle UI PAUSE_Devil uses QUIT_New
+        if QUIT_Seaside.match_luma(self.device.image, offset=offset):
+            self.device.click(QUIT_Seaside)
+            timer.reset()
+            return True
         return False
 
     def ensure_combat_oil_loaded(self):
@@ -308,11 +340,16 @@ class Combat(Level, HPBalancer, Retirement, SubmarineCall, CombatAuto, CombatMan
                     continue
             if self.handle_submarine_call(submarine):
                 continue
+            # bunch of popup handlers
             if self.handle_popup_confirm('COMBAT_EXECUTE'):
                 continue
-            if self.appear_then_click(CONTINUE_CONFIRM):
+            if self.handle_urgent_commission():
                 continue
-            if self.appear_then_click(ASH_CONTINUE_CONFIRM):
+            if self.handle_guild_popup_cancel():
+                continue
+            if self.handle_vote_popup():
+                continue
+            if self.handle_mission_popup_ack():
                 continue
 
             # End
@@ -519,6 +556,9 @@ class Combat(Level, HPBalancer, Retirement, SubmarineCall, CombatAuto, CombatMan
                 if not exp_info and self.handle_battle_status(drop=drop):
                     battle_status = True
                     continue
+            # bunch of popup handlers
+            if self.handle_popup_confirm('COMBAT_STATUS'):
+                continue
             if self.handle_urgent_commission(drop=drop):
                 continue
             if self.handle_guild_popup_cancel():
@@ -527,6 +567,7 @@ class Combat(Level, HPBalancer, Retirement, SubmarineCall, CombatAuto, CombatMan
                 continue
             if self.handle_mission_popup_ack():
                 continue
+            # additional handlers in combat
             if self.handle_auto_search_exit(drop=drop):
                 continue
             if self.handle_combat_mis_click():

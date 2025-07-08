@@ -205,6 +205,8 @@ class FastForwardHandler(AutoSearchHandler):
 
         state = 'on' if self.config.Campaign_UseClearMode else 'off'
         changed = FAST_FORWARD.set(state, main=self)
+        if changed:
+            self.map_wait_auto_search()
         return changed
 
     def handle_map_fleet_lock(self, enable=None):
@@ -227,6 +229,25 @@ class FastForwardHandler(AutoSearchHandler):
         changed = FLEET_LOCK.set(state, main=self)
 
         return changed
+
+    def map_wait_auto_search(self):
+        """
+        When enabling clear mode (FAST_FORWARD), AUTO_SEARCH has an animation to appear
+        wait until it fully appeared
+
+        Returns:
+            bool: If waited
+        """
+        timeout = Timer(1, count=3).start()
+        for _ in self.loop():
+            state = AUTO_SEARCH.get(main=self)
+            logger.attr('AUTO_SEARCH', state)
+            if state != 'unknown':
+                return True
+            if timeout.reached():
+                # some maps may have clear mode but don't have auto search
+                logger.info('map wait auto search timeout')
+                return False
 
     def handle_auto_search(self):
         """
@@ -334,7 +355,10 @@ class FastForwardHandler(AutoSearchHandler):
         Pages:
             in: MAP_PREPARATION
         """
-        return color_bar_percentage(self.device.image, area=MAP_CLEAR_PERCENTAGE.area, prev_color=(231, 170, 82))
+        percent = color_bar_percentage(self.device.image, area=MAP_CLEAR_PERCENTAGE.area, prev_color=(231, 170, 82))
+        if self.config.MAP_CLEAR_PERCENTAGE_SHORT:
+            percent *= 1.4
+        return percent
 
     def campaign_name_increase(self, name):
         """
@@ -347,8 +371,23 @@ class FastForwardHandler(AutoSearchHandler):
             str: Name of next stage in upper case,
                 or origin name if unable to increase.
         """
+        # Copy STAGE_INCREASE to avoid potential duplicate inserting
+        stage_increase = [r for r in self.STAGE_INCREASE]
+        # Insert custom increase logic
+        if self.config.STAGE_INCREASE_AB:
+            stage_increase = [
+                'A1 > A2 > A3 > B1 > B2 > B3',
+                'C1 > C2 > C3 > D1 > D2 > D3',
+            ] + stage_increase
+        custom = self.config.STAGE_INCREASE_CUSTOM
+        if custom:
+            if isinstance(custom, str):
+                custom = [custom]
+            stage_increase = custom + stage_increase
+
+        # Increase stage
         name = to_map_input_name(name)
-        for increase in self.STAGE_INCREASE:
+        for increase in stage_increase:
             increase = [i.strip(' \t\r\n') for i in increase.split('>')]
             if name in increase:
                 index = increase.index(name) + 1
